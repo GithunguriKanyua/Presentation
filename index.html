@@ -78,11 +78,29 @@
       color: black;
       cursor: pointer;
       transition: 0.3s;
-      min-width: 150px;
+      min-width: 180px;
     }
 
     #enterBtn:hover {
       background: #ccc;
+    }
+
+    /* ===== DOWNLOAD BUTTON ===== */
+    #downloadBtn {
+      margin-top: 12px;
+      padding: 12px 24px;
+      font-size: 1.05rem;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      min-width: 180px;
+    }
+
+    #downloadBtn:hover {
+      background: white;
+      color: black;
     }
 
     /* ===== PRESENTATION CONTAINER ===== */
@@ -121,7 +139,7 @@
       width: 50%;
       height: 100%;
       z-index: 10;
-      touch-action: manipulation; /* improve tap response on mobile */
+      touch-action: manipulation;
     }
 
     .nav-left { left: 0; }
@@ -138,12 +156,12 @@
       z-index: 20;
     }
 
-    /* ===== MEDIA QUERIES FOR MOBILE ===== */
+    /* ===== MOBILE ===== */
     @media (max-width: 600px) {
       #landing h1 {
         font-size: 1.5rem;
       }
-      #enterBtn {
+      #enterBtn, #downloadBtn {
         padding: 10px 20px;
         font-size: 1rem;
       }
@@ -156,9 +174,16 @@
 <!-- ===== LANDING ===== -->
 <div id="landing">
   <div id="overlay"></div>
+
   <div id="landing-content">
-    <h1>DishiGo ltd</h1>
+    <h1>DishiGo Ltd</h1>
+
     <button id="enterBtn">Start Presentation Mode</button>
+
+    <!-- DOWNLOAD BUTTON -->
+    <a href="files/DISHIGO LTD Proposal.pdf" download>
+      <button id="downloadBtn">Download Proposal</button>
+    </a>
   </div>
 </div>
 
@@ -215,9 +240,7 @@
   ];
 
   const landing = document.getElementById("landing");
-  const landingContent = document.getElementById("landing-content");
   const enterBtn = document.getElementById("enterBtn");
-
   const presentation = document.getElementById("presentation");
   const navLeft = document.querySelector(".nav-left");
   const navRight = document.querySelector(".nav-right");
@@ -250,7 +273,6 @@
     currentEl.textContent = currentIndex + 1;
   }
 
-  /* ===== NAVIGATION ===== */
   function nextSlide() {
     if (currentIndex < frames.length - 1) {
       currentIndex++;
@@ -287,7 +309,6 @@
     if (document.fullscreenElement) document.exitFullscreen();
   }
 
-  /* ===== KEYBOARD ===== */
   document.addEventListener("keydown", (e) => {
     if (presentation.style.display !== "block") return;
 
@@ -296,11 +317,9 @@
     if (e.key === "Escape") exitPresentation();
   });
 
-  /* ===== CLICK NAVIGATION ===== */
   navRight.addEventListener("click", nextSlide);
   navLeft.addEventListener("click", prevSlide);
 
-  /* ===== DISABLE RIGHT CLICK ===== */
   presentation.addEventListener("contextmenu", e => e.preventDefault());
 
   /* ===== LANDING BACKGROUND SLIDESHOW ===== */
