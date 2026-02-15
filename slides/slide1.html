@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DishiGo Ltd - Investor Pitch Deck</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,13 +27,16 @@
       align-items: center;
     }
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100%;
       position: relative;
       background-color: #1a3a52; /* Deep Blue Brand Color */
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 1280px;
+      aspect-ratio: 16/9;
     }
     .bg-pattern {
       position: absolute;
@@ -81,6 +84,13 @@
       opacity: 0.05;
       z-index: 2;
     }
+    h2 {
+      font-size: clamp(1rem, 3vw, 2.5rem);
+    }
+
+    p {
+      font-size: clamp(0.8rem, 2vw, 1.5rem);
+    }
     .content-wrapper {
       position: relative;
       z-index: 10;
@@ -96,6 +106,7 @@
       font-weight: 800;
       color: #ffffff;
       letter-spacing: -1px;
+      font-size: clamp(2rem, 5vw, 5rem);
     }
     .accent-text {
       color: #00bcd4; /* Teal Accent */
@@ -110,11 +121,11 @@
     }
     .visual-container {
       position: absolute;
-      right: 50px;
+      right: 4%;
       top: 50%;
       transform: translateY(-50%);
-      width: 500px;
-      height: 500px;
+      width: 40%;
+      height: auto;
       z-index: 5;
       display: flex;
       align-items: center;
