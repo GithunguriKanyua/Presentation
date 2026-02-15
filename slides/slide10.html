@@ -10,26 +10,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html, body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
+      margin: 0; padding: 0;
+      height: 100%; width: 100%;
       background: black;
-      overflow: hidden;
-    }
-    body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
-      background: black;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: flex; justify-content: center; align-items: center;
     }
 
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100%;
+      height: 100%;
+      max-width: 1280px;
+      max-height: 720px;
       position: relative;
       background-color: #ffffff;
       display: flex;
@@ -37,7 +28,30 @@
       overflow: hidden;
     }
 
-    /* Header Section */
+    /* Responsive Layout Adjustment */
+    @media (max-width: 1024px) {
+      .slide-container {
+        max-height: none; /* Allow scrolling on mobile */
+        height: auto;
+        overflow-y: auto;
+      }
+      .header-section {
+        padding: 20px !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+      }
+      .main-content {
+        flex-direction: column !important; /* Stack columns */
+        padding: 20px !important;
+        gap: 20px !important;
+      }
+      .title-group h1 { font-size: 28px !important; }
+      .col-founders, .col-structure { width: 100% !important; }
+      .founder-card { flex-direction: column; text-align: center; }
+      .avatar-box { margin-bottom: 10px; }
+    }
+
     .header-section {
       padding: 40px 60px 20px 60px;
       display: flex;
@@ -48,231 +62,23 @@
       border-bottom: 1px solid #f3f4f6;
     }
 
-    .title-group h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: #00bcd4;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+    .title-group h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #00bcd4; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .title-group h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #1a3a52; font-size: 42px; margin: 0; line-height: 1.1; }
 
-    .title-group h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      color: #1a3a52;
-      font-size: 42px;
-      margin: 0;
-      line-height: 1.1;
-    }
+    .main-content { flex: 1; padding: 40px 60px; background-color: #f9fafb; position: relative; display: flex; gap: 40px; }
+    .bg-pattern { position: absolute; inset: 0; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px; opacity: 0.4; z-index: 0; }
 
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      padding: 40px 60px;
-      background-color: #f9fafb;
-      position: relative;
-      display: flex;
-      gap: 40px;
-    }
+    .col-founders { flex: 1.4; display: flex; flex-direction: column; gap: 24px; z-index: 1; }
+    .founder-card { background: white; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e5e7eb; transition: transform 0.2s ease; }
+    .avatar-box { width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #1a3a52 0%, #2c5270 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; flex-shrink: 0; position: relative; overflow: hidden; }
 
-    /* Background Pattern */
-    .bg-pattern {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: 0.4;
-      z-index: 0;
-    }
+    .founder-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 20px; color: #1a3a52; margin-bottom: 4px; }
+    .founder-role { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #00bcd4; text-transform: uppercase; margin-bottom: 8px; }
+    .founder-bio { font-size: 14px; color: #6b7280; line-height: 1.5; }
 
-    /* Left Column: Founders */
-    .col-founders {
-      flex: 1.4;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      z-index: 1;
-    }
-
-    .founder-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-      transition: transform 0.2s ease;
-    }
-
-    .founder-card:hover {
-      transform: translateY(-2px);
-      border-color: #00bcd4;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-
-    .avatar-box {
-      width: 100px;
-      height: 100px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #1a3a52 0%, #2c5270 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 36px;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .avatar-box::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255,255,255,0.1);
-      clip-path: polygon(0 0, 100% 0, 100% 20%, 0 100%);
-    }
-
-    .founder-info {
-      flex: 1;
-    }
-
-    .founder-name {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 22px;
-      color: #1a3a52;
-      margin-bottom: 4px;
-    }
-
-    .founder-role {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #00bcd4;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-    }
-
-    .founder-bio {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: #6b7280;
-      line-height: 1.5;
-    }
-
-    /* Right Column: Structure & Advisors */
-    .col-structure {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      z-index: 1;
-    }
-
-    .structure-card {
-      background: #1a3a52;
-      border-radius: 16px;
-      padding: 30px;
-      color: white;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .structure-header {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .structure-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .structure-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .structure-label {
-      font-size: 14px;
-      color: #9ca3af;
-    }
-
-    .structure-value {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      color: white;
-      text-align: right;
-    }
-
-    .advisors-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-    }
-
-    .advisor-badge {
-      background-color: #f3f4f6;
-      border-left: 4px solid #00bcd4;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 4px;
-    }
-
-    /* Footer */
-    .footer-bar {
-      height: 50px;
-      background-color: white;
-      border-top: 1px solid #f3f4f6;
-      display: flex;
-      align-items: center;
-      padding: 0 60px;
-      justify-content: space-between;
-      z-index: 10;
-    }
-
-    .footer-text {
-      color: #9ca3af;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .page-number {
-      color: #1a3a52;
-      font-weight: 700;
-      font-size: 14px;
-    }
+    .col-structure { flex: 1; display: flex; flex-direction: column; gap: 24px; z-index: 1; }
+    .structure-card { background: #1a3a52; border-radius: 16px; padding: 24px; color: white; position: relative; overflow: hidden; }
+    .footer-bar { height: 50px; background-color: white; border-top: 1px solid #f3f4f6; display: flex; align-items: center; padding: 0 60px; justify-content: space-between; z-index: 10; }
   </style>
 </head>
 <body>
@@ -373,17 +179,21 @@
 <script>
   function scaleSlide() {
     const container = document.querySelector(".slide-container");
-    if (!container) return;
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
 
-    const baseWidth = 1280;
-    const baseHeight = 720;
-
-    const scaleX = window.innerWidth / baseWidth;
-    const scaleY = window.innerHeight / baseHeight;
-
-    const scale = Math.min(scaleX, scaleY);
-
-    container.style.transform = `scale(${scale})`;
+    if (winW > 1024) {
+      // Desktop: Scale to fit perfectly
+      const scale = Math.min(winW / 1280, winH / 720);
+      container.style.transform = `scale(${scale})`;
+      container.style.position = "absolute";
+    } else {
+      // Mobile/Tablet: Natural flow
+      container.style.transform = "none";
+      container.style.position = "relative";
+      container.style.width = "100%";
+      container.style.height = "auto";
+    }
   }
 
   window.addEventListener("load", scaleSlide);
