@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Traction &amp; Metrics - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header Section */
+    .header-section {
+      padding: 40px 60px 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      background-color: white;
+      z-index: 10;
+    }
+    .title-group h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #00bcd4;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .title-group h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #1a3a52;
+      font-size: 42px;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    /* Main Content Grid */
+    .main-content {
+      flex: 1;
+      padding: 20px 60px 40px 60px;
+      background-color: #f9fafb;
+      position: relative;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 24px;
+      height: 100%;
+      z-index: 2;
+      position: relative;
+    }
+
+    .kpi-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border-color: #00bcd4;
+    }
+
+    .kpi-card.highlight {
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5270 100%);
+      color: white;
+      border: none;
+    }
+
+    .kpi-card.span-2 {
+      grid-column: span 2;
+    }
+
+    /* Card Content Styles */
+    .icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .bg-teal-light { background-color: #ecfdf5; color: #00bcd4; }
+    .bg-blue-light { background-color: #eff6ff; color: #1a3a52; }
+    .bg-orange-light { background-color: #fff7ed; color: #f59e0b; }
+
+    .highlight .icon-wrapper {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #00bcd4;
+    }
+
+    .metric-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 4px;
+      color: #1a3a52;
+    }
+
+    .highlight .metric-value {
+      color: white;
+    }
+
+    .metric-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .highlight .metric-label {
+      color: #9ca3af;
+    }
+
+    .sub-metric {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+      width: fit-content;
+    }
+
+    .sub-metric.positive { background-color: #d1fae5; color: #059669; }
+    .sub-metric.neutral { background-color: #f3f4f6; color: #4b5563; }
+
+    .highlight .sub-metric {
+      background-color: rgba(0, 188, 212, 0.2);
+      color: #00bcd4;
+    }
+
+    /* Decorative Background */
+    .bg-decoration {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.4;
+      background-image:
+        radial-gradient(#e5e7eb 1px, transparent 1px),
+        radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+
+    .circle-blur {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: #00bcd4;
+      filter: blur(80px);
+      opacity: 0.05;
+      z-index: 1;
+    }
+
+    /* Footer */
+    .footer-bar {
+      height: 50px;
+      background-color: white;
+      border-top: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .footer-text { color: #9ca3af; font-size: 12px; font-weight: 500; }
+    .page-number { color: #1a3a52; font-weight: 700; font-size: 14px; }
+  </style>
+</head>
+<body>
+<div class="slide-container">
+  <!-- Header -->
+  <div class="header-section">
+    <div class="title-group">
+      <h2>Traction &amp; Metrics</h2>
+      <h1>Proving the Model</h1>
+    </div>
+    <div style="text-align: right;">
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Monthly Growth Factor</p>
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+        <i class="fas fa-chart-line" style="color: #10b981;"></i>
+        <p style="color: #1a3a52; font-size: 24px; font-weight: 800; font-family: 'Montserrat', sans-serif;">1.02x</p>
+      </div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="bg-decoration"></div>
+    <div class="circle-blur" style="top: 10%; right: 10%;"></div>
+    <div class="circle-blur" style="bottom: 10%; left: 10%;"></div>
+    <div class="kpi-grid">
+      <!-- Card 1: Customers (Highlighted) -->
+      <div class="kpi-card highlight span-2">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div class="icon-wrapper">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="sub-metric">
+            <i class="fas fa-arrow-up" style="margin-right: 4px;"></i> Active Base
+          </div>
+        </div>
+        <div>
+          <p class="metric-value">400+</p>
+          <p class="metric-label">Total Customers</p>
+        </div>
+      </div>
+      <!-- Card 2: Hotels -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-teal-light">
+          <i class="fas fa-hotel"></i>
+        </div>
+        <div>
+          <p class="metric-value">16+</p>
+          <p class="metric-label">Partner Hotels</p>
+          <div class="sub-metric positive">Transport Pkg</div>
+        </div>
+      </div>
+      <!-- Card 3: Advertisers -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-blue-light">
+          <i class="fas fa-bullhorn"></i>
+        </div>
+        <div>
+          <p class="metric-value">8+</p>
+          <p class="metric-label">Active Advertisers</p>
+          <div class="sub-metric neutral">30% Fill Rate</div>
+        </div>
+      </div>
+      <!-- Card 4: Riders -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-orange-light">
+          <i class="fas fa-motorcycle"></i>
+        </div>
+        <div>
+          <p class="metric-value">6</p>
+          <p class="metric-label">Delivery Riders</p>
+          <div class="sub-metric positive">99% Service Rate</div>
+        </div>
+      </div>
+      <!-- Card 5: Super Merchants -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-blue-light">
+          <i class="fas fa-star"></i>
+        </div>
+        <div>
+          <p class="metric-value">1</p>
+          <p class="metric-label">Super-Merchant</p>
+          <div class="sub-metric positive">100% Satisfaction</div>
+        </div>
+      </div>
+      <!-- Card 6: Retention (Split) -->
+      <div class="kpi-card span-2">
+        <div class="icon-wrapper bg-teal-light">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: auto;">
+          <div>
+            <p class="metric-value" style="font-size: 36px;">97%</p>
+            <p class="metric-label">High-Value Retention</p>
+          </div>
+          <div style="width: 1px; background-color: #e5e7eb;"></div>
+          <div>
+            <p class="metric-value" style="font-size: 36px; color: #6b7280;">63%</p>
+            <p class="metric-label">General Retention</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="footer-bar">
+    <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
+    <p class="page-number">05</p>
+  </div>
+</div>
+</body>
+<script>
+  function scaleSlide() {
+    const container = document.querySelector(".slide-container");
+    if (!container) return;
+
+    const baseWidth = 1280;
+    const baseHeight = 720;
+
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    container.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener("load", scaleSlide);
+  window.addEventListener("resize", scaleSlide);
+</script>
+
+</html>

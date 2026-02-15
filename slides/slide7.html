@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Unit Economics - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header Section */
+    .header-section {
+      padding: 40px 60px 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      background-color: white;
+      z-index: 10;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .title-group h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #00bcd4;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .title-group h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #1a3a52;
+      font-size: 42px;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 40px 60px;
+      background-color: #f9fafb;
+      display: flex;
+      gap: 40px;
+      position: relative;
+    }
+
+    /* Columns */
+    .col-left {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .col-right {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Data Tables */
+    .data-card {
+      background: white;
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+    .card-header {
+      background-color: #1a3a52;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-header.secondary {
+      background-color: #00bcd4;
+    }
+    .card-header h3 {
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table th, .data-table td {
+      padding: 15px 25px;
+      text-align: left;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .data-table th {
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      background-color: #f9fafb;
+    }
+    .data-table td {
+      color: #1f2937;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .highlight-text {
+      color: #1a3a52;
+      font-weight: 700;
+    }
+    .sub-text {
+      font-size: 12px;
+      color: #9ca3af;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Summary Box */
+    .summary-box {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid #ccfbf1;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .summary-row:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .summary-label {
+      color: #64748b;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .summary-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #334155;
+      font-size: 20px;
+    }
+    .total-value {
+      color: #00bcd4;
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .note-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #92400e;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    /* Decorative */
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, #f3f4f6 1px, transparent 1px),
+        linear-gradient(to bottom, #f3f4f6 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Footer */
+    .footer-bar {
+      height: 50px;
+      background-color: white;
+      border-top: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .footer-text { color: #9ca3af; font-size: 12px; font-weight: 500; }
+    .page-number { color: #1a3a52; font-weight: 700; font-size: 14px; }
+  </style>
+</head>
+<body>
+<div class="slide-container">
+  <!-- Header -->
+  <div class="header-section">
+    <div class="title-group">
+      <h2>Unit Economics</h2>
+      <h1>Financial Snapshot</h1>
+    </div>
+    <div style="text-align: right;">
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Revenue Model</p>
+      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Daily Performance</p>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="bg-grid"></div>
+    <!-- Left Column: Detailed Breakdown -->
+    <div class="col-left z-10">
+      <!-- Operational Metrics -->
+      <div class="data-card">
+        <div class="card-header">
+          <h3><i class="fas fa-cogs"></i> Operational Inputs</h3>
+          <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Core Logistics</span>
+        </div>
+        <table class="data-table">
+          <thead>
+          <tr>
+            <th style="width: 40%;">Metric</th>
+            <th style="width: 30%;">Volume</th>
+            <th style="width: 30%;">Unit Economics</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              Standard Delivery
+              <span class="sub-text">Last-mile urban</span>
+            </td>
+            <td class="highlight-text">45 <span class="text-xs text-gray-400 font-normal">orders/day</span></td>
+            <td>
+              <span class="text-green-600 font-bold">Ksh 100</span> <span class="text-xs text-gray-500">Value</span><br/>
+              <span class="text-red-400 text-xs">(-Ksh 40 Rider Pay)</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Long-Distance</td>
+            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">orders</span></td>
+            <td><span class="text-gray-600">Ksh 1,200</span> <span class="text-xs text-gray-400">Trip Pay</span></td>
+          </tr>
+          <tr>
+            <td>Hotel Packages</td>
+            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">partners</span></td>
+            <td><span class="text-gray-600">Ksh 200</span> <span class="text-xs text-gray-400">/Package</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Advertising Metrics -->
+      <div class="data-card">
+        <div class="card-header secondary">
+          <h3><i class="fas fa-bullhorn"></i> Advertising Inputs</h3>
+          <span style="font-size: 12px; color: rgba(255,255,255,0.8);">High Margin Layer</span>
+        </div>
+        <table class="data-table">
+          <thead>
+          <tr>
+            <th style="width: 40%;">Channel</th>
+            <th style="width: 30%;">Volume</th>
+            <th style="width: 30%;">Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Standard Daily Ads</td>
+            <td class="highlight-text">8 <span class="text-xs text-gray-400 font-normal">slots</span></td>
+            <td class="highlight-text">Ksh 1,000</td>
+          </tr>
+          <tr>
+            <td>Top Hotel Ads</td>
+            <td class="highlight-text">1 <span class="text-xs text-gray-400 font-normal">premium slot</span></td>
+            <td class="highlight-text">Ksh 4,800</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Right Column: Summary & Clarification -->
+    <div class="col-right z-10">
+      <div class="summary-box">
+        <div style="position: absolute; top: -10px; right: 20px; background: #00bcd4; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700;">DAILY SNAPSHOT</div>
+        <div class="summary-row">
+          <span class="summary-label">Core Operations Total</span>
+          <span class="summary-value text-gray-500">Ksh 3,050</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Advertising Revenue</span>
+          <span class="summary-value text-teal-600">+ Ksh 12,800</span>
+        </div>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e2e8f0; text-align: right;">
+          <span class="summary-label" style="display: block; margin-bottom: 5px;">Total Daily Revenue</span>
+          <span class="total-value">Ksh 15,850</span>
+        </div>
+      </div>
+<!--      <div class="note-box">-->
+<!--        <i class="fas fa-info-circle mt-1"></i>-->
+<!--        <div>-->
+<!--          <strong>Clarification Needed:</strong>-->
+<!--          <p style="margin: 2px 0 0 0;">Figures reflect current daily run-rate based on provided documentation. Long-distance and Hotel Package volumes require clarification on frequency (Daily vs Monthly) to confirm exact unit economics scaling.</p>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="footer-bar">
+    <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
+    <p class="page-number">07</p>
+  </div>
+</div>
+</body>
+<script>
+  function scaleSlide() {
+    const container = document.querySelector(".slide-container");
+    if (!container) return;
+
+    const baseWidth = 1280;
+    const baseHeight = 720;
+
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    container.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener("load", scaleSlide);
+  window.addEventListener("resize", scaleSlide);
+</script>
+</html>

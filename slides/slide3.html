@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Solution Overview - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      background-color: #ffffff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .header-section {
+      background-color: #1a3a52;
+      padding: 40px 60px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .header-content h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #00bcd4;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .header-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: white;
+      font-size: 42px;
+      margin: 0;
+      line-height: 1.1;
+    }
+    .main-content {
+      flex: 1;
+      padding: 40px 60px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 30px;
+      background-color: #f9fafb;
+      position: relative;
+    }
+    .solution-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s ease;
+    }
+    .solution-card:hover {
+      transform: translateY(-5px);
+      border-color: #00bcd4;
+    }
+    .icon-wrapper {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #1f2937;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .card-desc {
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* Specific Card Styles */
+    .card-cost .icon-wrapper { background-color: #ecfdf5; color: #10b981; }
+    .card-track .icon-wrapper { background-color: #eff6ff; color: #3b82f6; }
+    .card-remote .icon-wrapper { background-color: #fef3c7; color: #d97706; }
+    .card-revenue .icon-wrapper { background-color: #f5f3ff; color: #8b5cf6; }
+
+    /* Metric Badges */
+    .metric-badge {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background-color: #10b981;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .grid-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.5;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .footer-bar {
+      height: 60px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+      justify-content: space-between;
+    }
+    .footer-text {
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .page-number {
+      color: #1a3a52;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .connector-line-v {
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      bottom: 10%;
+      width: 2px;
+      background-color: #e5e7eb;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+    .connector-line-h {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background-color: #e5e7eb;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    .center-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid #f3f4f6;
+    }
+    .hub-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #1a3a52;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+<div class="slide-container">
+  <!-- Header -->
+  <div class="header-section">
+    <div class="header-content">
+      <h2>Our Solution</h2>
+      <h1>Building the Logistics Layer <br/>for Everyone.</h1>
+    </div>
+    <div style="text-align: right;">
+      <p style="color: #9ca3af; font-size: 14px; margin-bottom: 5px;">Core Value Proposition</p>
+      <div style="display: flex; align-items: center; justify-content: flex-end;">
+        <div style="width: 40px; height: 4px; background-color: #00bcd4; margin-right: 10px;"></div>
+        <p style="color: white; font-weight: 600;">Accessible &amp; Scalable</p>
+      </div>
+    </div>
+  </div>
+  <!-- Main Grid Content -->
+  <div class="main-content">
+    <div class="grid-pattern"></div>
+    <div class="connector-line-v"></div>
+    <div class="connector-line-h"></div>
+    <!-- Center Hub -->
+    <div class="center-hub">
+      <span class="hub-logo">DG</span>
+    </div>
+    <!-- Card 1: Cost Reduction -->
+    <div class="solution-card card-cost">
+      <div class="icon-wrapper">
+        <i class="fas fa-arrow-trend-down"></i>
+      </div>
+      <div class="metric-badge">-50% Cost</div>
+      <h3 class="card-title">Radical Affordability</h3>
+      <p class="card-desc">
+        By optimizing routes and removing subscription bloat, we cut logistics costs by up to 50% for businesses. This unlocks delivery for small merchants who were previously priced out.
+      </p>
+    </div>
+    <!-- Card 2: Bundled Trust -->
+    <div class="solution-card card-track">
+      <div class="icon-wrapper">
+        <i class="fas fa-shield-halved"></i>
+      </div>
+      <h3 class="card-title">Bundled Tracking &amp; Trust</h3>
+      <p class="card-desc">
+        We bundle transportation with real-time tracking, removing the "stress of transportation." Merchants and customers get transparency, building the trust needed for digital commerce.
+      </p>
+    </div>
+    <!-- Card 3: Remote Access -->
+    <div class="solution-card card-remote">
+      <div class="icon-wrapper">
+        <i class="fas fa-motorcycle"></i>
+      </div>
+      <h3 class="card-title">Infrastructure-Agnostic Reach</h3>
+      <p class="card-desc">
+        "Wherever a transport means can pass, we can deliver." We leverage existing infrastructure (bodabodas, matatus) to reach remote villages and urban centers alike without heavy asset costs.
+      </p>
+    </div>
+    <!-- Card 4: Business Model -->
+    <div class="solution-card card-revenue">
+      <div class="icon-wrapper">
+        <i class="fas fa-chart-pie"></i>
+      </div>
+      <h3 class="card-title">Multi-Revenue Resilience</h3>
+      <p class="card-desc">
+        Our model goes beyond delivery fees. By integrating advertising and hotel transport packages, we subsidize delivery costs while maintaining healthy margins and diversifying income.
+      </p>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="footer-bar">
+    <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
+    <p class="page-number">03</p>
+  </div>
+</div>
+</body>
+<script>
+  function scaleSlide() {
+    const container = document.querySelector(".slide-container");
+    if (!container) return;
+
+    const baseWidth = 1280;
+    const baseHeight = 720;
+
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    container.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener("load", scaleSlide);
+  window.addEventListener("resize", scaleSlide);
+</script>
+
+</html>

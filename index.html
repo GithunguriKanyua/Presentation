@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentation Mode</title>
+
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ===== LANDING ===== */
+    #landing {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      z-index: 100;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    /* Background images container */
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      z-index: 1;
+    }
+
+    .bg-slide.active {
+      opacity: 1;
+    }
+
+    /* Dark overlay */
+    #overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8); /* semi-transparent dark */
+      z-index: 2;
+    }
+
+    #landing-content {
+      position: relative;
+      z-index: 3;
+      color: white;
+    }
+
+    #enterBtn {
+      margin-top: 20px;
+      padding: 14px 28px;
+      font-size: 18px;
+      border: none;
+      background: white;
+      color: black;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #enterBtn:hover {
+      background: #ccc;
+    }
+
+    /* ===== PRESENTATION CONTAINER ===== */
+    #presentation {
+      position: fixed;
+      inset: 0;
+      display: none;
+      background: black;
+      overflow: hidden;
+      transition: background 1s ease-in-out;
+    }
+
+    /* ===== SLIDES (IFRAMES) ===== */
+    .slide-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .slide-frame.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 5;
+    }
+
+    /* ===== NAVIGATION ZONES ===== */
+    .nav-zone {
+      position: fixed;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    .nav-left { left: 0; }
+    .nav-right { right: 0; }
+
+    /* ===== SLIDE COUNTER ===== */
+    #counter {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      color: grey;
+      font-size: 16px;
+      opacity: 0.8;
+      z-index: 20;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== LANDING ===== -->
+<div id="landing">
+  <div id="overlay"></div>
+  <div id="landing-content">
+    <h1>DishiGo ltd</h1>
+    <button id="enterBtn">Start Presentation Mode</button>
+  </div>
+</div>
+
+<!-- ===== PRESENTATION ===== -->
+<div id="presentation">
+  <div id="counter">
+    <span id="current">1</span> /
+    <span id="total">0</span>
+  </div>
+
+  <div class="nav-zone nav-left"></div>
+  <div class="nav-zone nav-right"></div>
+</div>
+
+<script>
+  /* ============================= */
+  /*   DEFINE YOUR SLIDES HERE    */
+  /* ============================= */
+  const slides = [
+    "slides/slide1.html",
+    "slides/slide2.html",
+    "slides/slide3.html",
+    "slides/slide4.html",
+    "slides/slide5.html",
+    "slides/slide6.html",
+    "slides/slide7.html",
+    "slides/slide8.html",
+    "slides/slide9.html",
+    "slides/slide10.html",
+    "slides/slide11.html",
+    "slides/slide12.html",
+    "slides/slide13.html",
+  ];
+
+  /* ============================= */
+  /*   LANDING BACKGROUND IMAGES  */
+  /* ============================= */
+  const backgroundImages = [
+    "backgrounds/bg1.jpeg",
+    "backgrounds/bg2.jpeg",
+    "backgrounds/bg3.jpeg",
+    "backgrounds/bg4.jpeg",
+    "backgrounds/bg5.jpeg",
+    "backgrounds/bg6.jpeg",
+    "backgrounds/bg7.jpeg",
+    "backgrounds/bg8.jpeg",
+    "backgrounds/bg9.jpeg",
+    "backgrounds/bg10.jpeg",
+    "backgrounds/bg11.jpeg",
+    "backgrounds/bg12.jpeg",
+    "backgrounds/bg13.jpeg",
+    "backgrounds/bg14.jpeg",
+    "backgrounds/bg15.jpeg"
+  ];
+
+  const landing = document.getElementById("landing");
+  const landingContent = document.getElementById("landing-content");
+  const enterBtn = document.getElementById("enterBtn");
+
+  const presentation = document.getElementById("presentation");
+  const navLeft = document.querySelector(".nav-left");
+  const navRight = document.querySelector(".nav-right");
+  const currentEl = document.getElementById("current");
+  const totalEl = document.getElementById("total");
+
+  let currentIndex = 0;
+  let frames = [];
+
+  totalEl.textContent = slides.length;
+
+  /* ===== CREATE SLIDES ===== */
+  function createSlides() {
+    slides.forEach((src, index) => {
+      const iframe = document.createElement("iframe");
+      iframe.src = src;
+      iframe.classList.add("slide-frame");
+
+      if (index === 0) {
+        iframe.classList.add("active");
+      }
+
+      presentation.appendChild(iframe);
+      frames.push(iframe);
+    });
+  }
+
+  /* ===== UPDATE SLIDE ===== */
+  function updateSlide() {
+    frames.forEach(frame => frame.classList.remove("active"));
+    frames[currentIndex].classList.add("active");
+    currentEl.textContent = currentIndex + 1;
+  }
+
+  /* ===== NAVIGATION ===== */
+  function nextSlide() {
+    if (currentIndex < frames.length - 1) {
+      currentIndex++;
+      updateSlide();
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlide();
+    }
+  }
+
+  /* ===== ENTER PRESENTATION ===== */
+  enterBtn.addEventListener("click", async () => {
+    if (!frames.length) createSlides();
+
+    landing.style.display = "none";
+    presentation.style.display = "block";
+
+    if (document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    }
+
+    updateSlide();
+  });
+
+  /* ===== EXIT PRESENTATION ===== */
+  function exitPresentation() {
+    presentation.style.display = "none";
+    landing.style.display = "flex";
+
+    if (document.fullscreenElement) document.exitFullscreen();
+  }
+
+  /* ===== KEYBOARD ===== */
+  document.addEventListener("keydown", (e) => {
+    if (presentation.style.display !== "block") return;
+
+    if (["ArrowRight", "ArrowDown"].includes(e.key)) nextSlide();
+    if (["ArrowLeft", "ArrowUp"].includes(e.key)) prevSlide();
+    if (e.key === "Escape") exitPresentation();
+  });
+
+  /* ===== CLICK NAVIGATION ===== */
+  navRight.addEventListener("click", nextSlide);
+  navLeft.addEventListener("click", prevSlide);
+
+  /* ===== DISABLE RIGHT CLICK ===== */
+  presentation.addEventListener("contextmenu", e => e.preventDefault());
+
+  /* ===== LANDING BACKGROUND SLIDESHOW ===== */
+  const bgSlides = [];
+
+  backgroundImages.forEach((url, i) => {
+    const div = document.createElement("div");
+    div.classList.add("bg-slide");
+    if (i === 0) div.classList.add("active");
+    div.style.backgroundImage = `url('${url}')`;
+    landing.appendChild(div);
+    bgSlides.push(div);
+  });
+
+  let bgIndex = 0;
+  setInterval(() => {
+    bgSlides[bgIndex].classList.remove("active");
+    bgIndex = (bgIndex + 1) % bgSlides.length;
+    bgSlides[bgIndex].classList.add("active");
+  }, 5000);
+</script>
+
+</body>
+</html>
