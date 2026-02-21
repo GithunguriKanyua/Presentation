@@ -4,31 +4,23 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Go-to-Market Strategy - DishiGo Ltd</title>
+  <title>Unit Economics - DishiGo Ltd</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
     html, body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
+      margin: 0; padding: 0;
+      height: 100%; width: 100%;
       background: black;
-      overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
     }
-    body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
-      background: black;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100%;
+      height: 100%;
+      max-width: 1280px;
+      max-height: 720px;
       position: relative;
       background-color: #ffffff;
       display: flex;
@@ -36,197 +28,57 @@
       overflow: hidden;
     }
 
-    /* Header Section */
-    .header-section {
-      padding: 40px 60px 20px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      background-color: white;
-      z-index: 10;
-      border-bottom: 1px solid #f3f4f6;
-    }
-    .title-group h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: #00bcd4;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .title-group h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      color: #1a3a52;
-      font-size: 42px;
-      margin: 0;
-      line-height: 1.1;
+    /* Responsive Mobile/Tablet Adjustments */
+    @media (max-width: 1024px) {
+      .slide-container {
+        max-height: none;
+        height: auto;
+        overflow-y: auto; /* Allow scrolling on phones */
+      }
+      .header-section {
+        padding: 30px 20px !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+      }
+      .header-section > div:last-child { text-align: left !important; }
+      .title-group h1 { font-size: 28px !important; }
+
+      .main-content {
+        flex-direction: column !important; /* Stack the Left and Right columns */
+        padding: 20px !important;
+        gap: 20px !important;
+      }
+      .col-left, .col-right { width: 100% !important; flex: none !important; }
+
+      /* Make tables scrollable horizontally on small screens */
+      .data-card { overflow-x: auto; }
+      .data-table { min-width: 500px; }
+
+      .summary-box { padding: 20px !important; }
+      .total-value { font-size: 28px !important; }
     }
 
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      padding: 40px 60px;
-      background-color: #f9fafb;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .header-section { padding: 40px 60px 20px 60px; display: flex; justify-content: space-between; align-items: flex-end; background: white; z-index: 10; border-bottom: 1px solid #f3f4f6; }
+    .title-group h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #00bcd4; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .title-group h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #1a3a52; font-size: 42px; margin: 0; line-height: 1.1; }
 
-    /* Timeline Container */
-    .timeline-wrapper {
-      width: 100%;
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      padding-top: 20px;
-    }
+    .main-content { flex: 1; padding: 40px 60px; background-color: #f9fafb; display: flex; gap: 40px; position: relative; }
+    .col-left { flex: 3; display: flex; flex-direction: column; gap: 20px; z-index: 1; }
+    .col-right { flex: 2; display: flex; flex-direction: column; gap: 20px; z-index: 1; }
 
-    /* Connecting Line */
-    .timeline-line {
-      position: absolute;
-      top: 40px;
-      left: 50px;
-      right: 50px;
-      height: 4px;
-      background-color: #e5e7eb;
-      z-index: 0;
-      border-radius: 4px;
-    }
+    .data-card { background: white; border-radius: 16px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); overflow: hidden; }
+    .card-header { background-color: #1a3a52; padding: 12px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+    .card-header.secondary { background-color: #00bcd4; }
+    .card-header h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; margin: 0; }
 
-    .timeline-progress {
-      position: absolute;
-      top: 40px;
-      left: 50px;
-      width: 70%; /* Shows progress */
-      height: 4px;
-      background-color: #00bcd4;
-      z-index: 1;
-      border-radius: 4px;
-    }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { background: #f9fafb; color: #6b7280; font-size: 11px; text-transform: uppercase; padding: 12px 20px; text-align: left; }
+    .data-table td { padding: 12px 20px; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
 
-    /* Steps */
-    .step-container {
-      position: relative;
-      width: 23%;
-      z-index: 2;
-    }
-
-    .step-marker {
-      width: 80px;
-      height: 80px;
-      background-color: white;
-      border-radius: 50%;
-      border: 4px solid #f3f4f6;
-      margin: 0 auto 30px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #1a3a52;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .step-container:hover .step-marker {
-      transform: scale(1.1);
-      border-color: #00bcd4;
-      color: #00bcd4;
-    }
-
-    .active-marker {
-      border-color: #00bcd4;
-      background-color: #00bcd4;
-      color: white;
-    }
-
-    .future-marker {
-      border-color: #e5e7eb;
-      color: #9ca3af;
-      border-style: dashed;
-    }
-
-    .step-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .step-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: #1f2937;
-      font-size: 18px;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    .step-subtitle {
-      font-size: 13px;
-      color: #00bcd4;
-      font-weight: 600;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 20px;
-      letter-spacing: 0.5px;
-    }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      flex: 1;
-    }
-
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 12px;
-      font-size: 14px;
-      color: #4b5563;
-      line-height: 1.5;
-    }
-
-    .step-list li i {
-      margin-right: 10px;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #10b981; /* Green check */
-    }
-
-    /* Background Elements */
-    .bg-dots {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 20px 20px;
-      opacity: 0.3;
-      z-index: 0;
-    }
-
-    /* Footer */
-    .footer-bar {
-      height: 50px;
-      background-color: white;
-      border-top: 1px solid #f3f4f6;
-      display: flex;
-      align-items: center;
-      padding: 0 60px;
-      justify-content: space-between;
-      z-index: 10;
-    }
-    .footer-text { color: #9ca3af; font-size: 12px; font-weight: 500; }
-    .page-number { color: #1a3a52; font-weight: 700; font-size: 14px; }
+    .summary-box { background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%); border-radius: 16px; padding: 25px; border: 1px solid #ccfbf1; }
+    .summary-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding: 10px 0; }
+    .total-value { color: #00bcd4; font-size: 32px; font-weight: 800; font-family: 'Montserrat', sans-serif; }
   </style>
 </head>
 <body>
@@ -234,145 +86,144 @@
   <!-- Header -->
   <div class="header-section">
     <div class="title-group">
-      <h2>Strategy</h2>
-      <h1>Go-to-Market Plan</h1>
+      <h2>Unit Economics</h2>
+      <h1>Financial Snapshot</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Expansion Goal</p>
-      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Replicable &amp; Scalable</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Revenue Model</p>
+      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Daily Performance</p>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
-    <div class="bg-dots"></div>
-    <div class="timeline-wrapper">
-      <div class="timeline-line"></div>
-      <div class="timeline-progress"></div>
-      <!-- Step 1: Acquisition -->
-      <div class="step-container">
-        <div class="step-marker active-marker">
-          <i class="fab fa-whatsapp"></i>
+    <div class="bg-grid"></div>
+    <!-- Left Column: Detailed Breakdown -->
+    <div class="col-left z-10">
+      <!-- Operational Metrics -->
+      <div class="data-card">
+        <div class="card-header">
+          <h3><i class="fas fa-cogs"></i> Operational Inputs</h3>
+          <span style="font-size: 12px; color: rgba(255,255,255,0.7);">Core Logistics</span>
         </div>
-        <div class="step-card">
-          <h3 class="step-title">Merchant Acquisition</h3>
-          <p class="step-subtitle">Low-Cost Entry</p>
-          <ul class="step-list">
-            <li>
-              <i class="fas fa-check"></i>
-              <p><strong>WhatsApp Food:</strong> Leveraging existing food groups for low CAC.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p><strong>WhatsApp Events:</strong> Targeting event planners for bulk logistics.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p>Direct messaging outreach to local SME clusters.</p>
-            </li>
-          </ul>
+        <table class="data-table">
+          <thead>
+          <tr>
+            <th style="width: 40%;">Metric</th>
+            <th style="width: 30%;">Volume</th>
+            <th style="width: 30%;">Unit Economics</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              Standard Delivery
+              <span class="sub-text">Last-mile urban</span>
+            </td>
+            <td class="highlight-text">45 <span class="text-xs text-gray-400 font-normal">orders/day</span></td>
+            <td>
+              <span class="text-green-600 font-bold">Ksh 100</span> <span class="text-xs text-gray-500">Value</span><br/>
+              <span class="text-red-400 text-xs">(-Ksh 40 Rider Pay)</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Long-Distance</td>
+            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">orders</span></td>
+            <td><span class="text-gray-600">Ksh 1,200</span> <span class="text-xs text-gray-400">Trip Pay</span></td>
+          </tr>
+          <tr>
+            <td>Hotel Packages</td>
+            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">partners</span></td>
+            <td><span class="text-gray-600">Ksh 200</span> <span class="text-xs text-gray-400">/Package</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Advertising Metrics -->
+      <div class="data-card">
+        <div class="card-header secondary">
+          <h3><i class="fas fa-bullhorn"></i> Advertising Inputs</h3>
+          <span style="font-size: 12px; color: rgba(255,255,255,0.8);">High Margin Layer</span>
+        </div>
+        <table class="data-table">
+          <thead>
+          <tr>
+            <th style="width: 40%;">Channel</th>
+            <th style="width: 30%;">Volume</th>
+            <th style="width: 30%;">Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Standard Daily Ads</td>
+            <td class="highlight-text">8 <span class="text-xs text-gray-400 font-normal">slots</span></td>
+            <td class="highlight-text">Ksh 1,000</td>
+          </tr>
+          <tr>
+            <td>Top Hotel Ads</td>
+            <td class="highlight-text">1 <span class="text-xs text-gray-400 font-normal">premium slot</span></td>
+            <td class="highlight-text">Ksh 4,800</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Right Column: Summary & Clarification -->
+    <div class="col-right z-10">
+      <div class="summary-box">
+        <div style="position: absolute; top: -10px; right: 20px; background: #00bcd4; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700;">DAILY SNAPSHOT</div>
+        <div class="summary-row">
+          <span class="summary-label">Core Operations Total</span>
+          <span class="summary-value text-gray-500">Ksh 3,050</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Advertising Revenue</span>
+          <span class="summary-value text-teal-600">+ Ksh 12,800</span>
+        </div>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e2e8f0; text-align: right;">
+          <span class="summary-label" style="display: block; margin-bottom: 5px;">Total Daily Revenue</span>
+          <span class="total-value">Ksh 15,850</span>
         </div>
       </div>
-      <!-- Step 2: Partnerships -->
-      <div class="step-container">
-        <div class="step-marker active-marker">
-          <i class="fas fa-handshake"></i>
-        </div>
-        <div class="step-card">
-          <h3 class="step-title">B2B Partnerships</h3>
-          <p class="step-subtitle">Volume Anchor</p>
-          <ul class="step-list">
-            <li>
-              <i class="fas fa-check"></i>
-              <p><strong>Hotel Transport Packages:</strong> Securing consistent daily volume.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p>Partnering with 16+ hotels to stabilize rider income.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p>Creating "Super-Merchants" who drive recurring revenue.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- Step 3: Monetization -->
-      <div class="step-container">
-        <div class="step-marker active-marker">
-          <i class="fas fa-layer-group"></i>
-        </div>
-        <div class="step-card">
-          <h3 class="step-title">Trust &amp; Monetization</h3>
-          <p class="step-subtitle">Value Layer</p>
-          <ul class="step-list">
-            <li>
-              <i class="fas fa-check"></i>
-              <p><strong>Bundled Tracking:</strong> Building trust to reduce friction.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p><strong>Delivery Ads:</strong> Monetizing the physical asset to subsidize costs.</p>
-            </li>
-            <li>
-              <i class="fas fa-check"></i>
-              <p>Retaining users through transparency and reliability.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- Step 4: Expansion -->
-      <div class="step-container">
-        <div class="step-marker" style="background-color: white; border-color: #f97316; color: #f97316;">
-          <i class="fas fa-map-location-dot"></i>
-        </div>
-        <div class="step-card" style="border-top: 4px solid #f97316;">
-          <h3 class="step-title">Expansion</h3>
-          <p class="step-subtitle" style="color: #f97316;">Next Milestone</p>
-          <ul class="step-list">
-            <li>
-              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
-              <p><strong>Target: Nairobi</strong></p>
-            </li>
-            <li>
-              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
-              <p>Replicating the "infrastructure-agnostic" model.</p>
-            </li>
-            <li>
-              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
-              <p>Using funds to set up fleet and initial logistics base.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!--      <div class="note-box">-->
+      <!--        <i class="fas fa-info-circle mt-1"></i>-->
+      <!--        <div>-->
+      <!--          <strong>Clarification Needed:</strong>-->
+      <!--          <p style="margin: 2px 0 0 0;">Figures reflect current daily run-rate based on provided documentation. Long-distance and Hotel Package volumes require clarification on frequency (Daily vs Monthly) to confirm exact unit economics scaling.</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
   </div>
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">08</p>
+    <p class="page-number">07</p>
   </div>
 </div>
 </body>
 <script>
-  function adjustLayout() {
+  function handleResize() {
     const container = document.querySelector(".slide-container");
     const winW = window.innerWidth;
     const winH = window.innerHeight;
 
-    // On Desktop: Scale to fit 16:9
     if (winW > 1024) {
+      // Desktop: Presentation scale
       const scale = Math.min(winW / 1280, winH / 720);
       container.style.transform = `scale(${scale})`;
-      container.style.borderRadius = "0px";
+      container.style.position = "absolute";
+      container.style.width = "1280px";
+      container.style.height = "720px";
     } else {
-      // On Mobile/Tablet: Fill the screen naturally
+      // Mobile: Vertical flow
       container.style.transform = "none";
-      container.style.width = "100vw";
-      container.style.height = "100vh";
+      container.style.position = "relative";
+      container.style.width = "100%";
+      container.style.height = "auto";
+      container.style.borderRadius = "0";
     }
   }
 
-  window.addEventListener("load", adjustLayout);
-  window.addEventListener("resize", adjustLayout);
+  window.addEventListener("load", handleResize);
+  window.addEventListener("resize", handleResize);
 </script>
 </html>

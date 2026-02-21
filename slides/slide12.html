@@ -4,11 +4,12 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>The Ask - DishiGo Ltd</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <title>Operational Challenges - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -18,7 +19,7 @@
       overflow: hidden;
     }
     body {
-      margin: 0;
+      mmargin: 0;
       height: 100%;
       width: 100%;
       background: black;
@@ -73,10 +74,9 @@
       flex: 1;
       padding: 40px 60px;
       background-color: #f9fafb;
-      position: relative;
       display: flex;
-      gap: 40px;
-      align-items: stretch;
+      gap: 50px;
+      position: relative;
     }
 
     /* Background Pattern */
@@ -87,192 +87,159 @@
       width: 100%;
       height: 100%;
       background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-size: 20px 20px;
       opacity: 0.4;
       z-index: 0;
     }
 
-    /* Left Column: The Ask */
-    .ask-card {
-      flex: 0 0 350px;
-      background-color: #1a3a52;
-      border-radius: 24px;
-      padding: 40px 30px;
-      color: white;
+    /* Left Column: Challenges */
+    .col-challenges {
+      flex: 1.3;
+      z-index: 1;
       display: flex;
       flex-direction: column;
+      gap: 20px;
+    }
+
+    .challenge-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-left: 5px solid #ef4444; /* Red for high priority */
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .challenge-card.medium {
+      border-left-color: #f59e0b; /* Orange for medium priority */
+    }
+
+    .challenge-card.financial {
+      border-left-color: #8b5cf6; /* Purple for financial */
+    }
+
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #f3f4f6;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      color: #6b7280;
+      flex-shrink: 0;
+    }
+
+    .challenge-content h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #1f2937;
+      font-size: 16px;
+      margin: 0 0 5px 0;
+    }
+
+    .challenge-content p {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Right Column: Costs */
+    .col-costs {
+      flex: 1;
       z-index: 1;
     }
 
-    .ask-amount-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #00bcd4;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-
-    .ask-amount {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 64px;
-      font-weight: 800;
+    .cost-card {
+      background: #1a3a52; /* Brand Blue */
+      border-radius: 16px;
+      padding: 30px;
       color: white;
-      line-height: 1;
-      margin-bottom: 10px;
-      letter-spacing: -2px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
 
-    .ask-currency {
-      font-size: 32px;
-      vertical-align: super;
-      margin-right: 5px;
+    .cost-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 15px;
     }
 
-    .equity-box {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 30px;
-      backdrop-filter: blur(10px);
-    }
-
-    .equity-value {
+    .cost-header h3 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 36px;
       font-weight: 700;
-      color: #00bcd4;
-      display: block;
-      margin-bottom: 5px;
+      font-size: 20px;
+      margin: 0;
     }
 
-    .equity-label {
-      font-family: 'Inter', sans-serif;
+    .lean-badge {
+      background-color: #00bcd4;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cost-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
       font-size: 14px;
       color: #e5e7eb;
     }
 
-    .valuation-text {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #9ca3af;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 20px;
+    .cost-table tr:last-child td {
+      border-bottom: none;
     }
 
-    /* Right Column: Use of Funds */
-    .funds-container {
-      flex: 1;
-      background-color: white;
-      border-radius: 24px;
-      padding: 30px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      z-index: 1;
+    .cost-value {
+      text-align: right;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
     }
 
-    .chart-header {
+    .total-row {
+      margin-top: auto;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
     }
 
-    .chart-title {
+    .total-label {
+      font-size: 14px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 28px;
+      color: #00bcd4;
+    }
+
+    /* Zero Salary Highlight */
+    .zero-salary {
+      color: #00bcd4;
       font-weight: 700;
-      color: #1f2937;
-    }
-
-    .chart-area {
-      flex: 1;
-      position: relative;
-      width: 100%;
-      height: 320px;
-    }
-
-    .legend-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-      font-size: 12px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      background-color: #f9fafb;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #f3f4f6;
-    }
-
-    .legend-color {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 8px;
-      flex-shrink: 0;
-    }
-
-    .legend-text {
-      flex: 1;
-      color: #4b5563;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .legend-value {
-      font-weight: 700;
-      color: #1f2937;
-      margin-left: 8px;
-    }
-
-    /* Warning Box */
-    .warning-box {
-      margin-top: 15px;
-      background-color: #fffbeb;
-      border: 1px solid #fcd34d;
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .warning-icon {
-      color: #f59e0b;
-      font-size: 16px;
-    }
-
-    .warning-text {
-      color: #92400e;
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    /* Decorative Elements */
-    .deco-circle {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,188,212,0.1) 0%, rgba(255,255,255,0) 70%);
-      top: -50px;
-      right: -50px;
-      z-index: 0;
     }
 
     /* Footer */
@@ -305,77 +272,107 @@
   <!-- Header -->
   <div class="header-section">
     <div class="title-group">
-      <h2>Investment Opportunity</h2>
-      <h1>The Ask &amp; Use of Funds</h1>
+      <h2>Current Status</h2>
+      <h1>Operational Challenges</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Funding Round</p>
-      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Pre-seed Stage</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Burn Rate</p>
+      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Ultra-Lean Operations</p>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
     <div class="bg-pattern"></div>
-    <!-- Left Column: The Ask -->
-    <div class="ask-card">
-      <div style="position: absolute; top: 0; right: 0; padding: 20px; opacity: 0.1;">
-        <i class="fas fa-hand-holding-dollar fa-4x text-white"></i>
+    <!-- Left: Challenges List -->
+    <div class="col-challenges">
+      <!-- Financial -->
+      <div class="challenge-card financial">
+        <div class="icon-circle" style="color: #8b5cf6; background-color: #f5f3ff;">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="challenge-content">
+          <h3>Resource Constraints</h3>
+          <p>Revenue gaps have depleted founder finances. Personal funds currently sustaining operations, limiting ability to scale or absorb shocks.</p>
+        </div>
       </div>
-      <div>
-        <p class="ask-amount-label">We are raising</p>
-        <p class="ask-amount"><span class="ask-currency">$</span>30.7k</p>
+      <!-- Trust/Travel -->
+      <div class="challenge-card medium">
+        <div class="icon-circle" style="color: #f59e0b; background-color: #fffbeb;">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <div class="challenge-content">
+          <h3>Trust Building Overhead</h3>
+          <p>High travel requirements to establish face-to-face trust with merchants and customers in new regions, increasing acquisition costs.</p>
+        </div>
       </div>
-      <div class="equity-box">
-        <span class="equity-value">4%</span>
-        <span class="equity-label">Equity Offered</span>
+      <!-- Technical -->
+      <div class="challenge-card medium">
+        <div class="icon-circle" style="color: #f59e0b; background-color: #fffbeb;">
+          <i class="fas fa-code-branch"></i>
+        </div>
+        <div class="challenge-content">
+          <h3>Technical Integration Friction</h3>
+          <p>Resolving ongoing integration issues with Daraja (payments) and navigating Google platform policies causing operational delays.</p>
+        </div>
       </div>
-      <div class="valuation-text">
-        <p><i class="fas fa-chart-line mr-2 text-teal-400"></i> Implied Valuation: <strong>$800,000</strong></p>
-        <p class="mt-2"><i class="fas fa-undo mr-2 text-teal-400"></i> Includes Buyback Option</p>
+      <!-- Registration -->
+      <div class="challenge-card">
+        <div class="icon-circle" style="color: #ef4444; background-color: #fef2f2;">
+          <i class="fas fa-file-contract"></i>
+        </div>
+        <div class="challenge-content">
+          <h3>Compliance &amp; Setup</h3>
+          <p>Registration costs and formalization of processes creating initial drag on speed-to-market.</p>
+        </div>
       </div>
     </div>
-    <!-- Right Column: Use of Funds -->
-    <div class="funds-container">
-      <div class="deco-circle"></div>
-      <div class="chart-header">
-        <h3 class="chart-title">Allocation Breakdown</h3>
-        <div style="font-size: 12px; color: #6b7280; background: #f3f4f6; padding: 4px 10px; border-radius: 12px;">
-          Based on Proposal Estimates
+    <!-- Right: Cost Structure -->
+    <div class="col-costs">
+      <div class="cost-card">
+        <div class="cost-header">
+          <h3>Monthly Fixed Costs</h3>
+          <span class="lean-badge">Lean Model</span>
         </div>
-      </div>
-      <!-- ECharts Container -->
-      <div class="chart-area" id="allocationChart"></div>
-      <!-- Manual Legend/Grid -->
-      <div class="legend-grid">
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #00bcd4;"></div>
-          <span class="legend-text">Long-Distance Setup</span>
-          <span class="legend-value">$17.8k</span>
+        <table class="cost-table">
+          <tr>
+            <td><i class="fas fa-building mr-2 text-teal-400"></i> Rent</td>
+            <td class="cost-value">10,000</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-truck mr-2 text-teal-400"></i> Transport</td>
+            <td class="cost-value">10,000</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-utensils mr-2 text-teal-400"></i> Food</td>
+            <td class="cost-value">10,000</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-wifi mr-2 text-teal-400"></i> Internet</td>
+            <td class="cost-value">2,500</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-bolt mr-2 text-teal-400"></i> Electricity</td>
+            <td class="cost-value">2,000</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-bullhorn mr-2 text-teal-400"></i> Marketing</td>
+            <td class="cost-value">500</td>
+          </tr>
+          <tr style="background-color: rgba(255,255,255,0.1);">
+            <td style="padding-left: 10px; font-weight: 600; color: #fff;">
+              <i class="fas fa-user-tie mr-2 text-white"></i> Salaries
+            </td>
+            <td class="cost-value zero-salary" style="padding-right: 10px;">0</td>
+          </tr>
+        </table>
+        <div class="total-row">
+          <span class="total-label">Total Monthly Burn</span>
+          <div class="text-right">
+            <span class="total-amount">Ksh 35,000</span>
+          </div>
         </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #1a3a52;"></div>
-          <span class="legend-text">Marketing &amp; Exp.</span>
-          <span class="legend-value">$2.3k</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #2dd4bf;"></div>
-          <span class="legend-text">Coding Laptop</span>
-          <span class="legend-value">$2.3k</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #0f766e;"></div>
-          <span class="legend-text">Founders Living</span>
-          <span class="legend-value">$2.3k</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #99f6e4;"></div>
-          <span class="legend-text">Commuting</span>
-          <span class="legend-value">$2.3k</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background-color: #94a3b8;"></div>
-          <span class="legend-text">Other (Pay, Ops, etc)</span>
-          <span class="legend-value">$3.6k</span>
+        <div style="margin-top: 15px; font-size: 11px; color: #9ca3af; text-align: center; font-style: italic;">
+          *Founders are currently unpaid to maximize runway
         </div>
       </div>
     </div>
@@ -383,85 +380,9 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">11</p>
+    <p class="page-number">09</p>
   </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var chartDom = document.getElementById('allocationChart');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    // Data based on the prompt's provided list
-    const data = [
-      { value: 17751.94, name: 'Long-Distance Setup' },
-      { value: 2325.58, name: 'Marketing & Exp.' },
-      { value: 2325.58, name: 'Coding Laptop' },
-      { value: 2325.58, name: 'Founders Living' },
-      { value: 2325.58, name: 'Addtl. Commuting' },
-      { value: 1860.47, name: 'Founders Back Pay' },
-      { value: 1550.39, name: 'CEO Tablet' },
-      { value: 232.56, name: 'Ops Normalization' }
-    ];
-
-    option = {
-      tooltip: {
-        trigger: 'item',
-        formatter: function(params) {
-          return params.name + ': $' + params.value.toLocaleString() + ' (' + params.percent + '%)';
-        }
-      },
-      series: [
-        {
-          name: 'Use of Funds',
-          type: 'pie',
-          radius: ['45%', '70%'],
-          center: ['50%', '50%'],
-          avoidLabelOverlap: true,
-          itemStyle: {
-            borderRadius: 6,
-            borderColor: '#fff',
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 16,
-              fontWeight: 'bold',
-              color: '#1a3a52',
-              formatter: '{b}\n{d}%'
-            }
-          },
-          labelLine: {
-            show: false
-          },
-          data: data,
-          color: [
-            '#00bcd4', // Long Distance - Teal
-            '#1a3a52', // Marketing - Dark Blue
-            '#2dd4bf', // Laptop - Light Teal
-            '#0f766e', // Living - Dark Teal
-            '#99f6e4', // Commuting - Pale Teal
-            '#64748b', // Back Pay - Slate
-            '#94a3b8', // Tablet - Light Slate
-            '#cbd5e1'  // Ops - Gray
-          ]
-        }
-      ]
-    };
-
-    myChart.setOption(option);
-
-    // Handle window resize
-    window.addEventListener('resize', function() {
-      myChart.resize();
-    });
-  });
-</script>
 </body>
 <script>
   function adjustLayout() {

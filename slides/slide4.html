@@ -7,29 +7,24 @@
   <title>Market Opportunity - DishiGo Ltd</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <style>
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
       width: 100%;
       background: black;
-      overflow: hidden;
-    }
-    body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
-      background: black;
-      overflow: hidden;
+      font-family: 'Inter', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100%;
+      height: 100%;
+      max-width: 1280px;
+      max-height: 720px;
       position: relative;
       background-color: #ffffff;
       overflow: hidden;
@@ -37,7 +32,7 @@
       flex-direction: column;
     }
     .header-section {
-      padding: 40px 60px 20px 60px;
+      padding: 30px 60px 15px 60px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -62,113 +57,126 @@
     }
     .main-content {
       flex: 1;
-      padding: 30px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-    .left-col {
+      padding: 25px 60px;
       display: flex;
-      flex-direction: column;
       gap: 25px;
-    }
-    .right-col {
       background-color: #f9fafb;
-      border-radius: 20px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
     }
-    .stat-card {
+
+    /* Market Card Styles */
+    .market-card {
+      flex: 1;
       background: white;
-      border-radius: 12px;
-      padding: 20px;
-      border-left: 5px solid #00bcd4;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
-    }
-    .stat-card.secondary {
-      border-left-color: #1a3a52;
-    }
-    .stat-value {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      color: #1a3a52;
-      font-size: 32px;
-      margin-bottom: 5px;
-    }
-    .stat-label {
-      color: #6b7280;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    .highlight-box {
-      background-color: #1a3a52;
-      color: white;
-      padding: 25px;
-      border-radius: 16px;
-      margin-top: auto;
-      position: relative;
       overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s;
     }
-    .highlight-title {
+
+    .card-header {
+      padding: 20px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #1a3a52;
+      font-size: 20px;
+    }
+
+    /* Specific header colors */
+    .food-header .card-icon { background-color: #ffe4e6; color: #f43f5e; }
+    .logistics-header .card-icon { background-color: #e0f2fe; color: #0ea5e9; }
+    .ads-header .card-icon { background-color: #f0fdf4; color: #22c55e; }
+
+    .card-body {
+      padding: 20px 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .metric-block {
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .metric-block::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 5px;
+      width: 3px;
+      border-radius: 2px;
+    }
+
+    .tam-block::before { background-color: #1a3a52; }
+    .sam-block::before { background-color: #00bcd4; }
+    .analysis-block::before { background-color: #9ca3af; }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 18px;
-      margin-bottom: 10px;
-      color: #00bcd4;
+      color: #111827;
+      margin-bottom: 4px;
     }
-    .highlight-text {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #e5e7eb;
-      position: relative;
-      z-index: 2;
-    }
-    .chart-container {
-      position: relative;
-      height: 250px;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    .chart-label {
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
+
+    .metric-desc {
+      font-size: 12px;
       color: #4b5563;
-      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .arrow-down {
+      align-self: center;
+      color: #d1d5db;
       font-size: 14px;
+      margin: -10px 0;
     }
-    .efficiency-comparison {
-      display: flex;
+
+    .growth-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 20px;
-      margin-top: 20px;
+      gap: 4px;
+      padding: 4px 8px;
+      background-color: #ecfdf5;
+      color: #059669;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
     }
-    .comp-bar-container {
-      flex: 1;
-    }
-    .comp-bar {
-      height: 40px;
-      background-color: #e5e7eb;
-      border-radius: 6px;
-      position: relative;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .comp-fill {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding-left: 10px;
-      font-weight: 700;
-      color: white;
-      font-size: 13px;
-    }
+
     .footer-bar {
       height: 50px;
       background-color: white;
@@ -188,14 +196,6 @@
       font-weight: 700;
       font-size: 14px;
     }
-    .icon-bg {
-      position: absolute;
-      right: -20px;
-      bottom: -20px;
-      font-size: 120px;
-      color: rgba(255,255,255,0.05);
-      z-index: 1;
-    }
   </style>
 </head>
 <body>
@@ -204,75 +204,109 @@
   <div class="header-section">
     <div class="title-group">
       <h2>Market Opportunity</h2>
-      <h1>Kenya's Logistics Gap</h1>
+      <h1>Three-Sector Vision</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Total Addressable Market (TAM)</p>
-      <p style="color: #1a3a52; font-size: 24px; font-weight: 800; font-family: 'Montserrat', sans-serif;">KES 180 Billion</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">DishiGo Ltd operates across</p>
+      <div class="flex gap-4 mt-1">
+        <span class="px-3 py-1 bg-rose-50 text-rose-600 rounded-full text-xs font-bold uppercase tracking-wider">Food</span>
+        <span class="px-3 py-1 bg-sky-50 text-sky-600 rounded-full text-xs font-bold uppercase tracking-wider">Logistics</span>
+        <span class="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-bold uppercase tracking-wider">Ads</span>
+      </div>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
-    <!-- Left Column: Key Stats -->
-    <div class="left-col">
-      <div class="stat-card">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="stat-value">USD 4.7B</p>
-            <p class="stat-label">Projected Warehousing Market by 2030</p>
-          </div>
-          <div class="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500">
-            <i class="fas fa-warehouse"></i>
-          </div>
+    <!-- Card 1: Food & Delivery -->
+    <div class="market-card">
+      <div class="card-header food-header">
+        <div class="card-icon">
+          <i class="fas fa-utensils"></i>
         </div>
-        <div class="mt-4 w-full bg-gray-100 rounded-full h-1.5">
-          <div class="bg-teal-400 h-1.5 rounded-full" style="width: 72%"></div>
-        </div>
-        <p class="text-xs text-gray-500 mt-2">Growing from USD 3.4B in 2025</p>
+        <p class="card-title">Food &amp; Delivery</p>
       </div>
-      <div class="stat-card secondary">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="stat-value">30-40%</p>
-            <p class="stat-label">Post-Harvest Loss in Agriculture</p>
-          </div>
-          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-[#1a3a52]">
-            <i class="fas fa-wheat-awn"></i>
-          </div>
+      <div class="card-body">
+        <!-- TAM -->
+        <div class="metric-block tam-block">
+          <p class="metric-label">Total Addressable Market (TAM)</p>
+          <p class="metric-value">USD 4.1B <span class="growth-badge"><i class="fas fa-arrow-up"></i> 19% YoY</span></p>
+          <p class="metric-desc">Approx KES 103B in 2023. Annual growth rate of 19% driven by demand.</p>
         </div>
-        <p class="text-sm text-gray-600 mt-3">
-          Agriculture is ~33% of GDP. Inefficient logistics causes massive waste, creating urgent demand for better cold chain &amp; transport.
-        </p>
-      </div>
-      <div class="highlight-box">
-        <i class="fas fa-chart-line icon-bg"></i>
-        <p class="highlight-title">E-Commerce Tailwinds</p>
-        <p class="highlight-text">
-          With African e-commerce projected at $75B, the Kenyan market is demanding faster, reliable last-mile delivery. Small merchants need affordable logistics to participate in this growth.
-        </p>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- SAM -->
+        <div class="metric-block sam-block">
+          <p class="metric-label">Serviceable Market (SAM)</p>
+          <p class="metric-value">USD 106M</p>
+          <p class="metric-desc">Approx KES 19.3B projected by 2027 covering online food, grocery &amp; alcohol.</p>
+        </div>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- Market Analysis -->
+        <div class="metric-block analysis-block">
+          <p class="metric-label">Market Analysis</p>
+          <p class="metric-value">USD 151M by 2027</p>
+          <p class="metric-desc">Driven by rapid urbanization, smartphone adoption &amp; convenience demand.</p>
+        </div>
       </div>
     </div>
-    <!-- Right Column: Visual Data -->
-    <div class="right-col">
-      <p class="chart-label">The Efficiency Gap: Logistics Cost as % of Product Value</p>
-      <div class="chart-container">
-        <canvas id="costComparisonChart"></canvas>
+    <!-- Card 2: Logistics -->
+    <div class="market-card">
+      <div class="card-header logistics-header">
+        <div class="card-icon">
+          <i class="fas fa-truck-fast"></i>
+        </div>
+        <p class="card-title">Logistics</p>
       </div>
-      <div class="mt-6 pt-6 border-t border-gray-200">
-        <p class="font-bold text-[#1a3a52] mb-4 font-montserrat">Why DishiGo Wins:</p>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-check-circle text-teal-500"></i>
-            <p class="text-sm text-gray-600">Cutting per-km delivery costs through optimization</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <i class="fas fa-check-circle text-teal-500"></i>
-            <p class="text-sm text-gray-600"> unlocking rural &amp; urban routes ignored by giants</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <i class="fas fa-check-circle text-teal-500"></i>
-            <p class="text-sm text-gray-600">Digital payments &amp; tracking reduce friction</p>
-          </div>
+      <div class="card-body">
+        <!-- TAM -->
+        <div class="metric-block tam-block">
+          <p class="metric-label">Total Addressable Market (TAM)</p>
+          <p class="metric-value">USD 10B+ <span class="text-xs text-gray-500 font-normal">by 2030</span></p>
+          <p class="metric-desc">Currently USD 6.5-8B (2025). Includes freight, warehousing, courier &amp; 3PL.</p>
+        </div>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- SAM -->
+        <div class="metric-block sam-block">
+          <p class="metric-label">Serviceable Market (SAM)</p>
+          <p class="metric-value">USD 3.39B</p>
+          <p class="metric-desc">Approx KES 180B in 2025. Kenya serving as the strategic gateway to East Africa.</p>
+        </div>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- Market Analysis -->
+        <div class="metric-block analysis-block">
+          <p class="metric-label">Market Analysis</p>
+          <p class="metric-value">7.1% CAGR</p>
+          <p class="metric-desc">Projected growth from USD 6.37B (2025) to USD 10.3B by 2032.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3: Advertising -->
+    <div class="market-card">
+      <div class="card-header ads-header">
+        <div class="card-icon">
+          <i class="fas fa-bullhorn"></i>
+        </div>
+        <p class="card-title">Advertising</p>
+      </div>
+      <div class="card-body">
+        <!-- TAM -->
+        <div class="metric-block tam-block">
+          <p class="metric-label">Total Addressable Market (TAM)</p>
+          <p class="metric-value">KES 48B <span class="text-xs text-gray-500 font-normal">Jan-Sep '25</span></p>
+          <p class="metric-desc">Reinnovation opportunity as market shifts from betting/traditional to digital.</p>
+        </div>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- SAM -->
+        <div class="metric-block sam-block">
+          <p class="metric-label">Serviceable Market (SAM)</p>
+          <p class="metric-value">USD 365M <span class="text-xs text-gray-500 font-normal">by 2028</span></p>
+          <p class="metric-desc">Rapid shift to digital (17.45% CAGR). Digital to be 64% of total spend by 2029.</p>
+        </div>
+        <i class="fas fa-arrow-down arrow-down"></i>
+        <!-- Market Analysis -->
+        <div class="metric-block analysis-block">
+          <p class="metric-label">Market Analysis</p>
+          <p class="metric-value">USD 300M+ Online</p>
+          <p class="metric-desc">One of fastest growing markets globally. Driven by mobile-first, AI &amp; influencers.</p>
         </div>
       </div>
     </div>
@@ -283,60 +317,6 @@
     <p class="page-number">04</p>
   </div>
 </div>
-<script>
-  const ctx = document.getElementById('costComparisonChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Developed Markets', 'Kenya (Current)', 'DishiGo Target'],
-      datasets: [{
-        label: 'Logistics Cost %',
-        data: [8, 30, 15],
-        backgroundColor: [
-          '#9ca3af',  // Gray for benchmark
-          '#ef4444',  // Red for problem
-          '#00bcd4'   // Teal for solution
-        ],
-        borderRadius: 6,
-        barPercentage: 0.6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              return context.raw + '% of Product Value';
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 35,
-          grid: {
-            display: true,
-            color: '#f3f4f6'
-          },
-          ticks: {
-            callback: function(value) {
-              return value + '%';
-            }
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
-  });
-</script>
 </body>
 <script>
   function adjustLayout() {

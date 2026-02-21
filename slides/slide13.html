@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Exit &amp; Contact - DishiGo Ltd</title>
+  <title>The Ask - DishiGo Ltd</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -70,196 +71,208 @@
     /* Main Content */
     .main-content {
       flex: 1;
-      padding: 0;
+      padding: 40px 60px;
       background-color: #f9fafb;
       position: relative;
       display: flex;
+      gap: 40px;
+      align-items: stretch;
     }
 
-    /* Left Column: Exit Strategy */
-    .col-exit {
-      flex: 1;
-      padding: 60px;
-      background-color: #f9fafb;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    /* Right Column: Contact */
-    .col-contact {
-      flex: 0 0 500px;
-      background-color: #1a3a52;
-      color: white;
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-pattern {
+    /* Background Pattern */
+    .bg-pattern {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 30px 30px;
-      opacity: 0.5;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.4;
       z-index: 0;
     }
 
-    /* Cards */
-    .strategy-card {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-      margin-bottom: 30px;
+    /* Left Column: The Ask */
+    .ask-card {
+      flex: 0 0 350px;
+      background-color: #1a3a52;
+      border-radius: 24px;
+      padding: 40px 30px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      z-index: 1;
     }
 
-    .strategy-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 6px;
-      background-color: #00bcd4;
+    .ask-amount-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #00bcd4;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
 
-    .strategy-card.secondary::before {
-      background-color: #1a3a52;
+    .ask-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: -2px;
     }
 
-    .strategy-header {
+    .ask-currency {
+      font-size: 32px;
+      vertical-align: super;
+      margin-right: 5px;
+    }
+
+    .equity-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .equity-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #00bcd4;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .equity-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .valuation-text {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9ca3af;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+    }
+
+    /* Right Column: Use of Funds */
+    .funds-container {
+      flex: 1;
+      background-color: white;
+      border-radius: 24px;
+      padding: 30px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+
+    .chart-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .strategy-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: #1a3a52;
-    }
-
-    .strategy-year {
-      background-color: #ecfeff;
-      color: #0891b2;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .strategy-desc {
-      color: #4b5563;
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .divider-line {
-      height: 40px;
-      width: 2px;
-      background-color: #d1d5db;
-      margin-left: 30px;
-      margin-bottom: 0;
-      margin-top: -15px;
-      position: relative;
-      z-index: 0;
-    }
-
-    /* Contact Elements */
-    .contact-header {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 32px;
       margin-bottom: 10px;
-      color: white;
-      z-index: 2;
     }
 
-    .contact-sub {
-      color: #94a3b8;
-      font-size: 16px;
-      margin-bottom: 40px;
-      z-index: 2;
+    .chart-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
     }
 
-    .contact-item {
+    .chart-area {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .legend-item {
       display: flex;
       align-items: center;
-      margin-bottom: 25px;
-      z-index: 2;
+      background-color: #f9fafb;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #f3f4f6;
     }
 
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-      background-color: rgba(255,255,255,0.1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      color: #00bcd4;
-      font-size: 20px;
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
       flex-shrink: 0;
     }
 
-    .contact-label {
-      display: block;
-      font-size: 12px;
-      color: #94a3b8;
-      margin-bottom: 2px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .legend-text {
+      flex: 1;
+      color: #4b5563;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .contact-value {
-      font-family: 'Montserrat', sans-serif;
+    .legend-value {
+      font-weight: 700;
+      color: #1f2937;
+      margin-left: 8px;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      margin-top: 15px;
+      background-color: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .warning-icon {
+      color: #f59e0b;
       font-size: 16px;
-      font-weight: 600;
-      color: white;
     }
 
-    .founders-block {
-      margin-top: 40px;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      z-index: 2;
+    .warning-text {
+      color: #92400e;
+      font-size: 11px;
+      line-height: 1.4;
     }
 
-    .founder-names {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      color: white;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    /* Decorative Arrow */
-    .arrow-graphic {
+    /* Decorative Elements */
+    .deco-circle {
       position: absolute;
-      left: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: white;
-      transform: rotate(45deg);
-      z-index: 2;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,188,212,0.1) 0%, rgba(255,255,255,0) 70%);
+      top: -50px;
+      right: -50px;
+      z-index: 0;
     }
 
     /* Footer */
@@ -292,105 +305,163 @@
   <!-- Header -->
   <div class="header-section">
     <div class="title-group">
-      <h2>Path Forward</h2>
-      <h1>Exit Strategy &amp; Contact</h1>
+      <h2>Investment Opportunity</h2>
+      <h1>The Ask &amp; Use of Funds</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Next Steps</p>
-      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Partnership</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Funding Round</p>
+      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Pre-seed Stage</p>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
-    <!-- Left: Exit Strategy -->
-    <div class="col-exit">
-      <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #6b7280; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px;">Investor Liquidity Roadmap</h3>
-      <!-- Step 1 -->
-      <div class="strategy-card">
-        <div class="strategy-header">
-          <div class="strategy-title">
-            <i class="fas fa-money-bill-transfer text-teal-400 mr-2"></i> Share Buyback Option
-          </div>
-          <span class="strategy-year">Within 2 Years</span>
-        </div>
-        <p class="strategy-desc">
-          Company aims to conduct a buy-back of all shares sold within the 2-year timeline, offering early liquidity based on operational cash flow milestones.
-        </p>
+    <div class="bg-pattern"></div>
+    <!-- Left Column: The Ask -->
+    <div class="ask-card">
+      <div style="position: absolute; top: 0; right: 0; padding: 20px; opacity: 0.1;">
+        <i class="fas fa-hand-holding-dollar fa-4x text-white"></i>
       </div>
-      <!-- Connector -->
-      <div class="divider-line"></div>
-      <!-- Step 2 -->
-      <div class="strategy-card secondary" style="margin-bottom: 0;">
-        <div class="strategy-header">
-          <div class="strategy-title">
-            <i class="fas fa-chart-pie text-gray-700 mr-2"></i> Dividend Distribution
-          </div>
-          <span class="strategy-year" style="background-color: #f1f5f9; color: #475569;">After 3 Years</span>
-        </div>
-        <p class="strategy-desc">
-          For long-term holders, dividends will be paid annually according to equity share percentages, driven by stabilized profitability and expansion revenue.
-        </p>
+      <div>
+        <p class="ask-amount-label">We are raising</p>
+        <p class="ask-amount"><span class="ask-currency">$</span>30.7k</p>
+      </div>
+      <div class="equity-box">
+        <span class="equity-value">4%</span>
+        <span class="equity-label">Equity Offered</span>
+      </div>
+      <div class="valuation-text">
+        <p><i class="fas fa-chart-line mr-2 text-teal-400"></i> Implied Valuation: <strong>$800,000</strong></p>
+        <p class="mt-2"><i class="fas fa-undo mr-2 text-teal-400"></i> Includes Buyback Option</p>
       </div>
     </div>
-    <!-- Right: Contact -->
-    <div class="col-contact">
-      <div class="contact-pattern"></div>
-      <div class="arrow-graphic"></div> <!-- Visual connector to left side -->
-      <h2 class="contact-header">Let's Deliver the Future.</h2>
-      <p class="contact-sub">We are ready to scale. Join us in transforming logistics across Kenya.</p>
-      <!-- Founders -->
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-user-tie"></i>
-        </div>
-        <div>
-          <span class="contact-label">Founders</span>
-          <p class="contact-value">Francis Kanyua Kamau (CTO)</p>
-          <p class="contact-value" style="font-size: 14px; font-weight: 500; opacity: 0.9;">Peninah Wambui Kariu (Ops)</p>
+    <!-- Right Column: Use of Funds -->
+    <div class="funds-container">
+      <div class="deco-circle"></div>
+      <div class="chart-header">
+        <h3 class="chart-title">Allocation Breakdown</h3>
+        <div style="font-size: 12px; color: #6b7280; background: #f3f4f6; padding: 4px 10px; border-radius: 12px;">
+          Based on Proposal Estimates
         </div>
       </div>
-      <!-- Email -->
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-envelope"></i>
+      <!-- ECharts Container -->
+      <div class="chart-area" id="allocationChart"></div>
+      <!-- Manual Legend/Grid -->
+      <div class="legend-grid">
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00bcd4;"></div>
+          <span class="legend-text">Long-Distance Setup</span>
+          <span class="legend-value">$17.8k</span>
         </div>
-        <div>
-          <span class="contact-label">Email</span>
-          <p class="contact-value">invest@dishigo.co.ke</p>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #1a3a52;"></div>
+          <span class="legend-text">Marketing &amp; Exp.</span>
+          <span class="legend-value">$2.3k</span>
         </div>
-      </div>
-      <!-- Phone -->
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-phone"></i>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #2dd4bf;"></div>
+          <span class="legend-text">Coding Laptop</span>
+          <span class="legend-value">$2.3k</span>
         </div>
-        <div>
-          <span class="contact-label">Phone</span>
-          <p class="contact-value">+254 700 000 000</p>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #0f766e;"></div>
+          <span class="legend-text">Founders Living</span>
+          <span class="legend-value">$2.3k</span>
         </div>
-      </div>
-      <!-- Location -->
-      <div class="contact-item" style="margin-bottom: 0;">
-        <div class="contact-icon">
-          <i class="fas fa-map-marker-alt"></i>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #99f6e4;"></div>
+          <span class="legend-text">Commuting</span>
+          <span class="legend-value">$2.3k</span>
         </div>
-        <div>
-          <span class="contact-label">Headquarters</span>
-          <p class="contact-value">Nairobi, Kenya</p>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #94a3b8;"></div>
+          <span class="legend-text">Other (Pay, Ops, etc)</span>
+          <span class="legend-value">$3.6k</span>
         </div>
-      </div>
-      <div class="founders-block">
-        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 5px;">DishiGo Ltd - Private Limited Liability Company</p>
-        <p style="font-size: 12px; color: #94a3b8;">Registered in Kenya</p>
       </div>
     </div>
   </div>
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">12</p>
+    <p class="page-number">11</p>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var chartDom = document.getElementById('allocationChart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    // Data based on the prompt's provided list
+    const data = [
+      { value: 17751.94, name: 'Long-Distance Setup' },
+      { value: 2325.58, name: 'Marketing & Exp.' },
+      { value: 2325.58, name: 'Coding Laptop' },
+      { value: 2325.58, name: 'Founders Living' },
+      { value: 2325.58, name: 'Addtl. Commuting' },
+      { value: 1860.47, name: 'Founders Back Pay' },
+      { value: 1550.39, name: 'CEO Tablet' },
+      { value: 232.56, name: 'Ops Normalization' }
+    ];
+
+    option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          return params.name + ': $' + params.value.toLocaleString() + ' (' + params.percent + '%)';
+        }
+      },
+      series: [
+        {
+          name: 'Use of Funds',
+          type: 'pie',
+          radius: ['45%', '70%'],
+          center: ['50%', '50%'],
+          avoidLabelOverlap: true,
+          itemStyle: {
+            borderRadius: 6,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 16,
+              fontWeight: 'bold',
+              color: '#1a3a52',
+              formatter: '{b}\n{d}%'
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          data: data,
+          color: [
+            '#00bcd4', // Long Distance - Teal
+            '#1a3a52', // Marketing - Dark Blue
+            '#2dd4bf', // Laptop - Light Teal
+            '#0f766e', // Living - Dark Teal
+            '#99f6e4', // Commuting - Pale Teal
+            '#64748b', // Back Pay - Slate
+            '#94a3b8', // Tablet - Light Slate
+            '#cbd5e1'  // Ops - Gray
+          ]
+        }
+      ]
+    };
+
+    myChart.setOption(option);
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      myChart.resize();
+    });
+  });
+</script>
 </body>
 <script>
   function adjustLayout() {

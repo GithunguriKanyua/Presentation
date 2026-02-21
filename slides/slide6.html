@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Business Model - DishiGo Ltd</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <title>Traction &amp; Metrics - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
@@ -14,7 +14,6 @@
       height: 100%; width: 100%;
       background: black;
       display: flex; justify-content: center; align-items: center;
-      font-family: 'Inter', sans-serif;
     }
 
     .slide-container {
@@ -29,7 +28,7 @@
       overflow: hidden;
     }
 
-    /* Responsive Logic */
+    /* Responsive Breakpoints */
     @media (max-width: 1024px) {
       .slide-container {
         max-height: none;
@@ -40,56 +39,63 @@
         padding: 30px 20px !important;
         flex-direction: column;
         align-items: flex-start !important;
+        gap: 15px;
       }
-      .header-section > div:last-child { text-align: left !important; margin-top: 10px; }
-      .title-group h1 { font-size: 28px !important; }
-
+      .header-section > div:last-child {
+        text-align: left !important;
+      }
       .main-content {
         padding: 20px !important;
       }
-      .grid-container {
-        grid-template-columns: 1fr !important; /* Stack cards on mobile */
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 columns for tablets */
         grid-template-rows: auto !important;
-        gap: 20px !important;
+        height: auto !important;
       }
-      .center-decoration { display: none; } /* Remove hub to save space */
-      .revenue-card { padding: 20px !important; }
-    }
-
-    /* Tablet adjustment */
-    @media (min-width: 641px) and (max-width: 1024px) {
-      .grid-container {
-        grid-template-columns: repeat(2, 1fr) !important;
+      .kpi-card.span-2 {
+        grid-column: span 2 !important; /* Keep highlight card wide */
       }
     }
 
-    .header-section { padding: 40px 60px 20px 60px; display: flex; justify-content: space-between; align-items: flex-end; background: white; z-index: 10; border-bottom: 1px solid #f3f4f6; }
+    @media (max-width: 640px) {
+      .kpi-grid {
+        grid-template-columns: 1fr !important; /* 1 column for phones */
+      }
+      .kpi-card.span-2 {
+        grid-column: span 1 !important;
+      }
+      .metric-value { font-size: 36px !important; }
+      .title-group h1 { font-size: 28px !important; }
+    }
+
+    /* Core Styles */
+    .header-section { padding: 40px 60px 20px 60px; display: flex; justify-content: space-between; align-items: flex-end; background: white; z-index: 10; }
     .title-group h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #00bcd4; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
     .title-group h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #1a3a52; font-size: 42px; margin: 0; line-height: 1.1; }
 
-    .main-content { flex: 1; padding: 40px 60px; background-color: #f9fafb; position: relative; display: flex; justify-content: center; align-items: center; }
-    .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); gap: 30px; width: 100%; height: 100%; }
+    .main-content { flex: 1; padding: 20px 60px 40px 60px; background-color: #f9fafb; position: relative; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 24px; height: 100%; position: relative; z-index: 2; }
 
-    .revenue-card { background: white; border-radius: 16px; padding: 30px; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e5e7eb; position: relative; }
-    .card-header { display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f3f4f6; }
-    .icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px; flex-shrink: 0; }
+    .kpi-card { background: white; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e5e7eb; transition: transform 0.2s ease; }
+    .kpi-card.highlight { background: linear-gradient(135deg, #1a3a52 0%, #2c5270 100%); color: white; border: none; }
+    .kpi-card.span-2 { grid-column: span 2; }
 
-    /* Colors */
-    .card-delivery .icon-box { background-color: #eff6ff; color: #1a3a52; }
-    .card-long-dist .icon-box { background-color: #ecfdf5; color: #10b981; }
-    .card-hotel .icon-box { background-color: #fff7ed; color: #f59e0b; }
-    .card-ads .icon-box { background-color: #f5f3ff; color: #8b5cf6; }
+    .icon-wrapper { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 20px; }
+    .bg-teal-light { background-color: #ecfdf5; color: #00bcd4; }
+    .bg-blue-light { background-color: #eff6ff; color: #1a3a52; }
+    .bg-orange-light { background-color: #fff7ed; color: #f59e0b; }
+    .highlight .icon-wrapper { background-color: rgba(255, 255, 255, 0.15); color: #00bcd4; }
 
-    .card-title { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1f2937; font-size: 18px; }
-    .card-subtitle { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; }
+    .metric-value { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 4px; color: #1a3a52; }
+    .highlight .metric-value { color: white; }
+    .metric-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #6b7280; text-transform: uppercase; }
+    .highlight .metric-label { color: #9ca3af; }
 
-    .metrics-list { display: flex; flex-direction: column; gap: 12px; }
-    .metric-row { display: flex; justify-content: space-between; align-items: center; }
-    .metric-label { color: #6b7280; font-size: 13px; }
-    .metric-value { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1a3a52; font-size: 16px; }
-    .metric-highlight { color: #00bcd4; }
+    .sub-metric { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 8px; width: fit-content; }
+    .sub-metric.positive { background-color: #d1fae5; color: #059669; }
+    .sub-metric.neutral { background-color: #f3f4f6; color: #4b5563; }
+    .highlight .sub-metric { background-color: rgba(0, 188, 212, 0.2); color: #00bcd4; }
 
-    .center-decoration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: white; z-index: 5; display: flex; align-items: center; justify-content: center; border: 4px solid #f9fafb; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .footer-bar { height: 50px; background: white; border-top: 1px solid #f3f4f6; display: flex; align-items: center; padding: 0 60px; justify-content: space-between; }
   </style>
 </head>
@@ -98,121 +104,96 @@
   <!-- Header -->
   <div class="header-section">
     <div class="title-group">
-      <h2>Business Model</h2>
-      <h1>Revenue Streams</h1>
+      <h2>Traction &amp; Metrics</h2>
+      <h1>Proving the Model</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Strategy</p>
-      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Diversified &amp; Scalable</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Monthly Growth Factor</p>
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+        <i class="fas fa-chart-line" style="color: #10b981;"></i>
+        <p style="color: #1a3a52; font-size: 24px; font-weight: 800; font-family: 'Montserrat', sans-serif;">1.02x</p>
+      </div>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
-    <div class="bg-pattern"></div>
-    <!-- Center Hub Decoration -->
-    <div class="center-decoration">
-      <i class="fas fa-coins text-3xl text-teal-500"></i>
-    </div>
-    <div class="grid-container z-10">
-      <!-- Stream 1: Delivery -->
-      <div class="revenue-card card-delivery">
-        <div class="card-header">
-          <div class="icon-box">
-            <i class="fas fa-motorcycle"></i>
+    <div class="bg-decoration"></div>
+    <div class="circle-blur" style="top: 10%; right: 10%;"></div>
+    <div class="circle-blur" style="bottom: 10%; left: 10%;"></div>
+    <div class="kpi-grid">
+      <!-- Card 1: Customers (Highlighted) -->
+      <div class="kpi-card highlight span-2">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div class="icon-wrapper">
+            <i class="fas fa-users"></i>
           </div>
-          <div>
-            <p class="card-title">Last-Mile Delivery</p>
-            <p class="card-subtitle">Core Service</p>
+          <div class="sub-metric">
+            <i class="fas fa-arrow-up" style="margin-right: 4px;"></i> Active Base
           </div>
         </div>
-        <div class="metrics-list">
-          <div class="metric-row">
-            <p class="metric-label">Avg Daily Orders</p>
-            <p class="metric-value">45</p>
-          </div>
-          <div class="metric-row">
-            <p class="metric-label">Avg Order Value</p>
-            <p class="metric-value">Ksh 100</p>
-          </div>
-          <div class="metric-row" style="border-top: 1px dashed #e5e7eb; padding-top: 10px;">
-            <p class="metric-label">Rider Pay / Order</p>
-            <p class="metric-value text-gray-500">Ksh 40</p>
-          </div>
+        <div>
+          <p class="metric-value">400+</p>
+          <p class="metric-label">Total Customers</p>
         </div>
       </div>
-      <!-- Stream 2: Long Distance -->
-      <div class="revenue-card card-long-dist">
-        <div class="card-header">
-          <div class="icon-box">
-            <i class="fas fa-truck-fast"></i>
-          </div>
-          <div>
-            <p class="card-title">Long-Distance</p>
-            <p class="card-subtitle">High Value Trips</p>
-          </div>
+      <!-- Card 2: Hotels -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-teal-light">
+          <i class="fas fa-hotel"></i>
         </div>
-        <div class="metrics-list">
-          <div class="metric-row">
-            <p class="metric-label">Order Volume</p>
-            <p class="metric-value">16 <span class="text-sm font-normal text-gray-400">orders</span></p>
-          </div>
-          <div class="metric-row">
-            <p class="metric-label">Avg Trip Pay</p>
-            <p class="metric-value metric-highlight">Ksh 1,200</p>
-          </div>
-          <div class="metric-row" style="padding-top: 10px;">
-            <p class="metric-label text-xs text-gray-400 italic">Serves remote &amp; rural routes</p>
-          </div>
+        <div>
+          <p class="metric-value">16+</p>
+          <p class="metric-label">Partner Hotels</p>
+          <div class="sub-metric positive">Transport Pkg</div>
         </div>
       </div>
-      <!-- Stream 3: Hotel Packages -->
-      <div class="revenue-card card-hotel">
-        <div class="card-header">
-          <div class="icon-box">
-            <i class="fas fa-briefcase"></i>
-          </div>
-          <div>
-            <p class="card-title">Hotel Partnerships</p>
-            <p class="card-subtitle">B2B Transport Packages</p>
-          </div>
+      <!-- Card 3: Advertisers -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-blue-light">
+          <i class="fas fa-bullhorn"></i>
         </div>
-        <div class="metrics-list">
-          <div class="metric-row">
-            <p class="metric-label">Partner Hotels</p>
-            <p class="metric-value">16</p>
-          </div>
-          <div class="metric-row">
-            <p class="metric-label">Package Price</p>
-            <p class="metric-value">Ksh 200</p>
-          </div>
-          <div class="metric-row" style="padding-top: 10px;">
-            <p class="metric-label text-xs text-gray-400 italic">Recurring monthly revenue stream</p>
-          </div>
+        <div>
+          <p class="metric-value">8+</p>
+          <p class="metric-label">Active Advertisers</p>
+          <div class="sub-metric neutral">30% Fill Rate</div>
         </div>
       </div>
-      <!-- Stream 4: Advertising -->
-      <div class="revenue-card card-ads">
-        <div class="card-header">
-          <div class="icon-box">
-            <i class="fas fa-bullhorn"></i>
-          </div>
-          <div>
-            <p class="card-title">Advertising</p>
-            <p class="card-subtitle">Platform Monetization</p>
-          </div>
+      <!-- Card 4: Riders -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-orange-light">
+          <i class="fas fa-motorcycle"></i>
         </div>
-        <div class="metrics-list">
-          <div class="metric-row">
-            <p class="metric-label">Daily Ads</p>
-            <p class="metric-value">8</p>
+        <div>
+          <p class="metric-value">6</p>
+          <p class="metric-label">Delivery Riders</p>
+          <div class="sub-metric positive">99% Service Rate</div>
+        </div>
+      </div>
+      <!-- Card 5: Super Merchants -->
+      <div class="kpi-card">
+        <div class="icon-wrapper bg-blue-light">
+          <i class="fas fa-star"></i>
+        </div>
+        <div>
+          <p class="metric-value">1</p>
+          <p class="metric-label">Super-Merchant</p>
+          <div class="sub-metric positive">100% Satisfaction</div>
+        </div>
+      </div>
+      <!-- Card 6: Retention (Split) -->
+      <div class="kpi-card span-2">
+        <div class="icon-wrapper bg-teal-light">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: auto;">
+          <div>
+            <p class="metric-value" style="font-size: 36px;">97%</p>
+            <p class="metric-label">High-Value Retention</p>
           </div>
-          <div class="metric-row">
-            <p class="metric-label">Standard Ad Price</p>
-            <p class="metric-value">Ksh 1,000</p>
-          </div>
-          <div class="metric-row" style="background-color: #f5f3ff; margin: 0 -10px; padding: 8px 10px; border-radius: 6px;">
-            <p class="metric-label" style="color: #7c3aed; font-weight: 600;">Top Hotel Ads</p>
-            <p class="metric-value" style="color: #7c3aed;">Ksh 4,800</p>
+          <div style="width: 1px; background-color: #e5e7eb;"></div>
+          <div>
+            <p class="metric-value" style="font-size: 36px; color: #6b7280;">63%</p>
+            <p class="metric-label">General Retention</p>
           </div>
         </div>
       </div>
@@ -221,25 +202,25 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">06</p>
+    <p class="page-number">05</p>
   </div>
 </div>
 </body>
 <script>
-  function handleLayout() {
+  function adjustSlide() {
     const container = document.querySelector(".slide-container");
     const winW = window.innerWidth;
     const winH = window.innerHeight;
 
     if (winW > 1024) {
-      // Laptop: Standard Slide Mode
+      // Desktop: Scale to fit 16:9
       const scale = Math.min(winW / 1280, winH / 720);
       container.style.transform = `scale(${scale})`;
       container.style.position = "absolute";
       container.style.width = "1280px";
       container.style.height = "720px";
     } else {
-      // Mobile: Vertical Scrolling Mode
+      // Mobile: Natural height
       container.style.transform = "none";
       container.style.position = "relative";
       container.style.width = "100%";
@@ -247,7 +228,7 @@
     }
   }
 
-  window.addEventListener("load", handleLayout);
-  window.addEventListener("resize", handleLayout);
+  window.addEventListener("load", adjustSlide);
+  window.addEventListener("resize", adjustSlide);
 </script>
 </html>

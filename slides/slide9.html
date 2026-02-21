@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Advertising Platform Infrastructure - DishiGo Ltd</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <title>Go-to-Market Strategy - DishiGo Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
@@ -46,7 +46,6 @@
       z-index: 10;
       border-bottom: 1px solid #f3f4f6;
     }
-
     .title-group h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
@@ -56,7 +55,6 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
     .title-group h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
@@ -73,165 +71,146 @@
       background-color: #f9fafb;
       position: relative;
       display: flex;
-      gap: 40px;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
-    /* Infrastructure Diagram Layout */
-    .infra-grid {
-      display: grid;
-      grid-template-columns: 280px 1fr 320px;
-      gap: 30px;
+    /* Timeline Container */
+    .timeline-wrapper {
       width: 100%;
-      height: 100%;
-      align-items: center;
-      z-index: 1;
-    }
-
-    /* Section Cards */
-    .infra-column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      height: 100%;
-      justify-content: center;
-    }
-
-    .section-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-      transition: transform 0.2s;
-      position: relative;
-    }
-
-    .section-card:hover {
-      transform: translateY(-2px);
-      border-color: #00bcd4;
-    }
-
-    .card-header {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: #1a3a52;
-      font-size: 16px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: #6b7280;
-      line-height: 1.5;
-    }
-
-    /* Central Hub */
-    .central-hub {
-      background: #1a3a52;
-      border-radius: 24px;
-      padding: 40px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 400px;
-      border: 1px solid #2c5270;
+      justify-content: space-between;
+      padding-top: 20px;
     }
 
-    .logo-container {
-      width: 120px;
-      height: 120px;
-      background: white;
-      border-radius: 20px;
-      padding: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .hub-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: white;
-    }
-
-    .hub-subtitle {
-      font-size: 14px;
-      color: #00bcd4;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* Connection Lines */
-    .connection-line {
-      height: 2px;
-      background-color: #cbd5e1;
+    /* Connecting Line */
+    .timeline-line {
       position: absolute;
+      top: 40px;
+      left: 50px;
+      right: 50px;
+      height: 4px;
+      background-color: #e5e7eb;
       z-index: 0;
+      border-radius: 4px;
     }
 
-    /* Flow Indicators */
-    .flow-arrow {
+    .timeline-progress {
       position: absolute;
-      color: #00bcd4;
-      font-size: 18px;
+      top: 40px;
+      left: 50px;
+      width: 70%; /* Shows progress */
+      height: 4px;
+      background-color: #00bcd4;
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    /* Steps */
+    .step-container {
+      position: relative;
+      width: 23%;
       z-index: 2;
     }
 
-    /* Feature List in Right Column */
-    .feature-item {
+    .step-marker {
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 50%;
+      border: 4px solid #f3f4f6;
+      margin: 0 auto 30px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #1a3a52;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .step-container:hover .step-marker {
+      transform: scale(1.1);
+      border-color: #00bcd4;
+      color: #00bcd4;
+    }
+
+    .active-marker {
+      border-color: #00bcd4;
+      background-color: #00bcd4;
+      color: white;
+    }
+
+    .future-marker {
+      border-color: #e5e7eb;
+      color: #9ca3af;
+      border-style: dashed;
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #1f2937;
+      font-size: 18px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .step-subtitle {
+      font-size: 13px;
+      color: #00bcd4;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .step-list li {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 12px;
-      background: #f8fafc;
-      border-radius: 8px;
       margin-bottom: 12px;
-    }
-
-    .feature-icon {
-      color: #00bcd4;
-      font-size: 16px;
-      margin-top: 3px;
-    }
-
-    .feature-text {
-      font-size: 13px;
+      font-size: 14px;
       color: #4b5563;
-      font-weight: 500;
+      line-height: 1.5;
     }
 
-    /* Background Graphics */
-    .bg-grid {
+    .step-list li i {
+      margin-right: 10px;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #10b981; /* Green check */
+    }
+
+    /* Background Elements */
+    .bg-dots {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-size: 40px 40px;
-      background-image:
-        linear-gradient(to right, #f1f5f9 1px, transparent 1px),
-        linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.3;
       z-index: 0;
     }
 
@@ -246,18 +225,8 @@
       justify-content: space-between;
       z-index: 10;
     }
-
-    .footer-text {
-      color: #9ca3af;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .page-number {
-      color: #1a3a52;
-      font-weight: 700;
-      font-size: 14px;
-    }
+    .footer-text { color: #9ca3af; font-size: 12px; font-weight: 500; }
+    .page-number { color: #1a3a52; font-weight: 700; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -265,108 +234,122 @@
   <!-- Header -->
   <div class="header-section">
     <div class="title-group">
-      <h2>Infrastructure</h2>
-      <h1>Advertising Platform</h1>
+      <h2>Strategy</h2>
+      <h1>Go-to-Market Plan</h1>
     </div>
     <div style="text-align: right;">
-      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Revenue Layer</p>
-      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Integrated Ecosystem</p>
+      <p style="color: #6b7280; font-size: 14px; font-weight: 500;">Expansion Goal</p>
+      <p style="color: #1a3a52; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Replicable &amp; Scalable</p>
     </div>
   </div>
   <!-- Main Content -->
   <div class="main-content">
-    <div class="bg-grid"></div>
-    <div class="infra-grid">
-      <!-- Left Column: Inputs (Advertisers) -->
-      <div class="infra-column">
-        <div style="text-align: center; margin-bottom: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Data Sources</div>
-        <!-- Hotels -->
-        <div class="section-card">
-          <div class="card-header">
-            <i class="fas fa-hotel text-teal-500"></i>
-            <p>Hotels &amp; Venues</p>
-          </div>
-          <p class="card-desc">Direct advert setup for daily specials, events, and transport packages.</p>
+    <div class="bg-dots"></div>
+    <div class="timeline-wrapper">
+      <div class="timeline-line"></div>
+      <div class="timeline-progress"></div>
+      <!-- Step 1: Acquisition -->
+      <div class="step-container">
+        <div class="step-marker active-marker">
+          <i class="fab fa-whatsapp"></i>
         </div>
-        <!-- Individuals -->
-        <div class="section-card">
-          <div class="card-header">
-            <i class="fas fa-user text-teal-500"></i>
-            <p>Individuals</p>
-          </div>
-          <p class="card-desc">SME owners and event planners creating targeted local campaigns.</p>
-        </div>
-      </div>
-      <!-- Center Column: The Platform -->
-      <div class="central-hub">
-<!--        <div class="logo-container">-->
-<!--          <img alt="DishiGo Logo" class="logo-img" src="https://www.genspark.ai/api/files/s/9CtBoBmp?cache_control=3600"/>-->
-<!--        </div>-->
-        <h3 class="hub-title">Dishi Ad Engine</h3>
-        <p class="hub-subtitle">Centralized Distribution</p>
-        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-          <span style="background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; font-size: 12px;">Scheduling</span>
-          <span style="background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; font-size: 12px;">Targeting</span>
-          <span style="background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 15px; font-size: 12px;">Analytics</span>
+        <div class="step-card">
+          <h3 class="step-title">Merchant Acquisition</h3>
+          <p class="step-subtitle">Low-Cost Entry</p>
+          <ul class="step-list">
+            <li>
+              <i class="fas fa-check"></i>
+              <p><strong>WhatsApp Food:</strong> Leveraging existing food groups for low CAC.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p><strong>WhatsApp Events:</strong> Targeting event planners for bulk logistics.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p>Direct messaging outreach to local SME clusters.</p>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- Right Column: Outputs (Channels & Features) -->
-      <div class="infra-column">
-        <div style="text-align: center; margin-bottom: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Distribution Channels</div>
-        <!-- Channels Card -->
-        <div class="section-card" style="flex: 1;">
-          <div class="card-header">
-            <i class="fas fa-bullhorn text-teal-500"></i>
-            <p>Ad Channels</p>
-          </div>
-          <div class="feature-item">
-            <i class="fab fa-whatsapp feature-icon"></i>
-            <p class="feature-text"><strong>WhatsApp Adverts:</strong> Direct high-engagement messaging.</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-utensils feature-icon"></i>
-            <p class="feature-text"><strong>In-App Food:</strong> Contextual placement during ordering.</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-music feature-icon"></i>
-            <p class="feature-text"><strong>Dishi Vibes:</strong> Dedicated events &amp; lifestyle stream.</p>
-          </div>
+      <!-- Step 2: Partnerships -->
+      <div class="step-container">
+        <div class="step-marker active-marker">
+          <i class="fas fa-handshake"></i>
         </div>
-        <!-- Message Types Card -->
-        <div class="section-card" style="flex: 1;">
-          <div class="card-header">
-            <i class="fas fa-layer-group text-teal-500"></i>
-            <p>Campaign Types</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-paper-plane feature-icon"></i>
-            <p class="feature-text"><strong>Single/Repeated:</strong> One-off blasts or scheduled reminders.</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-thumbtack feature-icon"></i>
-            <p class="feature-text"><strong>Permanent Listings:</strong> searchable event repository for user discovery.</p>
-          </div>
+        <div class="step-card">
+          <h3 class="step-title">B2B Partnerships</h3>
+          <p class="step-subtitle">Volume Anchor</p>
+          <ul class="step-list">
+            <li>
+              <i class="fas fa-check"></i>
+              <p><strong>Hotel Transport Packages:</strong> Securing consistent daily volume.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p>Partnering with 16+ hotels to stabilize rider income.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p>Creating "Super-Merchants" who drive recurring revenue.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Step 3: Monetization -->
+      <div class="step-container">
+        <div class="step-marker active-marker">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div class="step-card">
+          <h3 class="step-title">Trust &amp; Monetization</h3>
+          <p class="step-subtitle">Value Layer</p>
+          <ul class="step-list">
+            <li>
+              <i class="fas fa-check"></i>
+              <p><strong>Bundled Tracking:</strong> Building trust to reduce friction.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p><strong>Delivery Ads:</strong> Monetizing the physical asset to subsidize costs.</p>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <p>Retaining users through transparency and reliability.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Step 4: Expansion -->
+      <div class="step-container">
+        <div class="step-marker" style="background-color: white; border-color: #f97316; color: #f97316;">
+          <i class="fas fa-map-location-dot"></i>
+        </div>
+        <div class="step-card" style="border-top: 4px solid #f97316;">
+          <h3 class="step-title">Expansion</h3>
+          <p class="step-subtitle" style="color: #f97316;">Next Milestone</p>
+          <ul class="step-list">
+            <li>
+              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
+              <p><strong>Target: Nairobi</strong></p>
+            </li>
+            <li>
+              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
+              <p>Replicating the "infrastructure-agnostic" model.</p>
+            </li>
+            <li>
+              <i class="fas fa-arrow-right" style="color: #f97316;"></i>
+              <p>Using funds to set up fleet and initial logistics base.</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <!-- Visual Connectors (SVG Overlay) -->
-    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;">
-      <!-- Lines from Left to Center -->
-      <path d="M 340 250 C 400 250, 400 360, 460 360" fill="none" stroke="#cbd5e1" stroke-width="2"></path>
-      <path d="M 340 450 C 400 450, 400 360, 460 360" fill="none" stroke="#cbd5e1" stroke-width="2"></path>
-      <!-- Lines from Center to Right -->
-      <path d="M 780 360 C 840 360, 840 250, 900 250" fill="none" stroke="#cbd5e1" stroke-width="2"></path>
-      <path d="M 780 360 C 840 360, 840 500, 900 500" fill="none" stroke="#cbd5e1" stroke-width="2"></path>
-      <!-- Arrows -->
-      <polygon fill="#cbd5e1" points="450,355 460,360 450,365"></polygon>
-      <polygon fill="#cbd5e1" points="890,245 900,250 890,255"></polygon>
-      <polygon fill="#cbd5e1" points="890,495 900,500 890,505"></polygon>
-    </svg>
   </div>
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">13</p>
+    <p class="page-number">08</p>
   </div>
 </div>
 </body>
