@@ -29,35 +29,7 @@
     }
 
     /* Responsive Mobile/Tablet Adjustments */
-    @media (max-width: 1024px) {
-      .slide-container {
-        max-height: none;
-        height: auto;
-        overflow-y: auto; /* Allow scrolling on phones */
-      }
-      .header-section {
-        padding: 30px 20px !important;
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 10px;
-      }
-      .header-section > div:last-child { text-align: left !important; }
-      .title-group h1 { font-size: 28px !important; }
 
-      .main-content {
-        flex-direction: column !important; /* Stack the Left and Right columns */
-        padding: 20px !important;
-        gap: 20px !important;
-      }
-      .col-left, .col-right { width: 100% !important; flex: none !important; }
-
-      /* Make tables scrollable horizontally on small screens */
-      .data-card { overflow-x: auto; }
-      .data-table { min-width: 500px; }
-
-      .summary-box { padding: 20px !important; }
-      .total-value { font-size: 28px !important; }
-    }
 
     .header-section { padding: 40px 60px 20px 60px; display: flex; justify-content: space-between; align-items: flex-end; background: white; z-index: 10; border-bottom: 1px solid #f3f4f6; }
     .title-group h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #00bcd4; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
@@ -119,21 +91,21 @@
               Standard Delivery
               <span class="sub-text">Last-mile urban</span>
             </td>
-            <td class="highlight-text">45 <span class="text-xs text-gray-400 font-normal">orders/day</span></td>
+            <td class="highlight-text">1,500 <span class="text-xs text-gray-400 font-normal">orders/day</span></td>
             <td>
               <span class="text-green-600 font-bold">Ksh 100</span> <span class="text-xs text-gray-500">Value</span><br/>
-              <span class="text-red-400 text-xs">(-Ksh 40 Rider Pay)</span>
+              <span class="text-red-400 text-xs">(-Ksh 40/ 3 orders Rider Pay)</span>
             </td>
           </tr>
           <tr>
             <td>Long-Distance</td>
-            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">orders</span></td>
-            <td><span class="text-gray-600">Ksh 1,200</span> <span class="text-xs text-gray-400">Trip Pay</span></td>
+            <td class="highlight-text">30 <span class="text-xs text-gray-400 font-normal">orders</span></td>
+            <td><span class="text-gray-600">Ksh 3,700</span> <span class="text-xs text-gray-400">Trip Pay</span></td>
           </tr>
           <tr>
             <td>Hotel Packages</td>
             <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">partners</span></td>
-            <td><span class="text-gray-600">Ksh 200</span> <span class="text-xs text-gray-400">/Package</span></td>
+            <td><span class="text-gray-600">Ksh 150</span> <span class="text-xs text-gray-400">/Package</span></td>
           </tr>
           </tbody>
         </table>
@@ -156,12 +128,12 @@
           <tr>
             <td>Standard Daily Ads</td>
             <td class="highlight-text">8 <span class="text-xs text-gray-400 font-normal">slots</span></td>
-            <td class="highlight-text">Ksh 1,000</td>
+            <td class="highlight-text">Ksh 800</td>
           </tr>
           <tr>
             <td>Top Hotel Ads</td>
-            <td class="highlight-text">1 <span class="text-xs text-gray-400 font-normal">premium slot</span></td>
-            <td class="highlight-text">Ksh 4,800</td>
+            <td class="highlight-text">16 <span class="text-xs text-gray-400 font-normal">Avg / Day</span></td>
+            <td class="highlight-text">Ksh 1,200</td>
           </tr>
           </tbody>
         </table>
@@ -173,15 +145,15 @@
         <div style="position: absolute; top: -10px; right: 20px; background: #00bcd4; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700;">DAILY SNAPSHOT</div>
         <div class="summary-row">
           <span class="summary-label">Core Operations Total</span>
-          <span class="summary-value text-gray-500">Ksh 3,050</span>
+          <span class="summary-value text-gray-500">Ksh 25,000</span>
         </div>
         <div class="summary-row">
           <span class="summary-label">Advertising Revenue</span>
-          <span class="summary-value text-teal-600">+ Ksh 12,800</span>
+          <span class="summary-value text-teal-600">+ Ksh 25,600</span>
         </div>
         <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e2e8f0; text-align: right;">
           <span class="summary-label" style="display: block; margin-bottom: 5px;">Total Daily Revenue</span>
-          <span class="total-value">Ksh 15,850</span>
+          <span class="total-value">Ksh 50,600</span>
         </div>
       </div>
       <!--      <div class="note-box">-->
@@ -196,34 +168,26 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">07</p>
+    <p class="page-number">08</p>
   </div>
 </div>
 </body>
+
 <script>
-  function handleResize() {
-    const container = document.querySelector(".slide-container");
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-
-    if (winW > 1024) {
-      // Desktop: Presentation scale
-      const scale = Math.min(winW / 1280, winH / 720);
-      container.style.transform = `scale(${scale})`;
-      container.style.position = "absolute";
-      container.style.width = "1280px";
-      container.style.height = "720px";
-    } else {
-      // Mobile: Vertical flow
-      container.style.transform = "none";
-      container.style.position = "relative";
-      container.style.width = "100%";
-      container.style.height = "auto";
-      container.style.borderRadius = "0";
+  (function () {
+    function fit() {
+      var el = document.querySelector('.slide-container');
+      if (!el) return;
+      el.style.width  = '1280px';
+      el.style.height = '720px';
+      el.style.flexShrink = '0';
+      el.style.overflow = 'hidden';
+      var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      el.style.transformOrigin = 'center center';
+      el.style.transform = 'scale(' + s + ')';
     }
-  }
-
-  window.addEventListener("load", handleResize);
-  window.addEventListener("resize", handleResize);
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
 </script>
 </html>

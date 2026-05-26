@@ -29,44 +29,9 @@
     }
 
     /* Responsive Breakpoints */
-    @media (max-width: 1024px) {
-      .slide-container {
-        max-height: none;
-        height: auto;
-        overflow-y: auto;
-      }
-      .header-section {
-        padding: 30px 20px !important;
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 15px;
-      }
-      .header-section > div:last-child {
-        text-align: left !important;
-      }
-      .main-content {
-        padding: 20px !important;
-      }
-      .kpi-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* 2 columns for tablets */
-        grid-template-rows: auto !important;
-        height: auto !important;
-      }
-      .kpi-card.span-2 {
-        grid-column: span 2 !important; /* Keep highlight card wide */
-      }
-    }
 
-    @media (max-width: 640px) {
-      .kpi-grid {
-        grid-template-columns: 1fr !important; /* 1 column for phones */
-      }
-      .kpi-card.span-2 {
-        grid-column: span 1 !important;
-      }
-      .metric-value { font-size: 36px !important; }
-      .title-group h1 { font-size: 28px !important; }
-    }
+
+
 
     /* Core Styles */
     .header-section { padding: 40px 60px 20px 60px; display: flex; justify-content: space-between; align-items: flex-end; background: white; z-index: 10; }
@@ -132,8 +97,8 @@
           </div>
         </div>
         <div>
-          <p class="metric-value">400+</p>
-          <p class="metric-label">Total Customers</p>
+          <p class="metric-value">3000+</p>
+          <p class="metric-label">Total Customers (two operational locations)</p>
         </div>
       </div>
       <!-- Card 2: Hotels -->
@@ -144,7 +109,7 @@
         <div>
           <p class="metric-value">16+</p>
           <p class="metric-label">Partner Hotels</p>
-          <div class="sub-metric positive">Transport Pkg</div>
+          <div class="sub-metric positive">40% Channel Share</div>
         </div>
       </div>
       <!-- Card 3: Advertisers -->
@@ -166,7 +131,7 @@
         <div>
           <p class="metric-value">6</p>
           <p class="metric-label">Delivery Riders</p>
-          <div class="sub-metric positive">99% Service Rate</div>
+          <div class="sub-metric positive">99% Active Rate</div>
         </div>
       </div>
       <!-- Card 5: Super Merchants -->
@@ -202,33 +167,26 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">05</p>
+    <p class="page-number">06</p>
   </div>
 </div>
 </body>
+
 <script>
-  function adjustSlide() {
-    const container = document.querySelector(".slide-container");
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-
-    if (winW > 1024) {
-      // Desktop: Scale to fit 16:9
-      const scale = Math.min(winW / 1280, winH / 720);
-      container.style.transform = `scale(${scale})`;
-      container.style.position = "absolute";
-      container.style.width = "1280px";
-      container.style.height = "720px";
-    } else {
-      // Mobile: Natural height
-      container.style.transform = "none";
-      container.style.position = "relative";
-      container.style.width = "100%";
-      container.style.height = "auto";
+  (function () {
+    function fit() {
+      var el = document.querySelector('.slide-container');
+      if (!el) return;
+      el.style.width  = '1280px';
+      el.style.height = '720px';
+      el.style.flexShrink = '0';
+      el.style.overflow = 'hidden';
+      var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      el.style.transformOrigin = 'center center';
+      el.style.transform = 'scale(' + s + ')';
     }
-  }
-
-  window.addEventListener("load", adjustSlide);
-  window.addEventListener("resize", adjustSlide);
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
 </script>
 </html>

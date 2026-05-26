@@ -69,7 +69,7 @@
     /* Main Content */
     .main-content {
       flex: 1;
-      padding: 40px 60px;
+      padding: 10px 60px;
       background-color: #f9fafb;
       position: relative;
       display: flex;
@@ -279,7 +279,7 @@
     <div class="infra-grid">
       <!-- Left Column: Inputs (Advertisers) -->
       <div class="infra-column">
-        <div style="text-align: center; margin-bottom: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Data Sources</div>
+        <div style="text-align: center; margin-bottom: 00px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Data Sources</div>
         <!-- Hotels -->
         <div class="section-card">
           <div class="card-header">
@@ -312,7 +312,7 @@
       </div>
       <!-- Right Column: Outputs (Channels & Features) -->
       <div class="infra-column">
-        <div style="text-align: center; margin-bottom: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Distribution Channels</div>
+        <div style="text-align: center; margin-bottom: 00px; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 12px;">Distribution Channels</div>
         <!-- Channels Card -->
         <div class="section-card" style="flex: 1;">
           <div class="card-header">
@@ -366,30 +366,26 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">13</p>
+    <p class="page-number">10</p>
   </div>
 </div>
 </body>
+
 <script>
-  function adjustLayout() {
-    const container = document.querySelector(".slide-container");
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-
-    // On Desktop: Scale to fit 16:9
-    if (winW > 1024) {
-      const scale = Math.min(winW / 1280, winH / 720);
-      container.style.transform = `scale(${scale})`;
-      container.style.borderRadius = "0px";
-    } else {
-      // On Mobile/Tablet: Fill the screen naturally
-      container.style.transform = "none";
-      container.style.width = "100vw";
-      container.style.height = "100vh";
+  (function () {
+    function fit() {
+      var el = document.querySelector('.slide-container');
+      if (!el) return;
+      el.style.width  = '1280px';
+      el.style.height = '720px';
+      el.style.flexShrink = '0';
+      el.style.overflow = 'hidden';
+      var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      el.style.transformOrigin = 'center center';
+      el.style.transform = 'scale(' + s + ')';
     }
-  }
-
-  window.addEventListener("load", adjustLayout);
-  window.addEventListener("resize", adjustLayout);
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
 </script>
 </html>

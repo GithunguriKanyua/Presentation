@@ -259,11 +259,11 @@
           <ul class="step-list">
             <li>
               <i class="fas fa-check"></i>
-              <p><strong>WhatsApp Food:</strong> Leveraging existing food groups for low CAC.</p>
+              <p><strong>Dishi Dash:</strong> Leveraging existing Whatsapp api for low CAC.</p>
             </li>
             <li>
               <i class="fas fa-check"></i>
-              <p><strong>WhatsApp Events:</strong> Targeting event planners for bulk logistics.</p>
+              <p><strong>Dishi Events:</strong> Targeting event planners for simple fast and curated adverts.</p>
             </li>
             <li>
               <i class="fas fa-check"></i>
@@ -287,11 +287,11 @@
             </li>
             <li>
               <i class="fas fa-check"></i>
-              <p>Partnering with 16+ hotels to stabilize rider income.</p>
+              <p>Partnering with businesses for farm to businesses and B2B transport.</p>
             </li>
             <li>
               <i class="fas fa-check"></i>
-              <p>Creating "Super-Merchants" who drive recurring revenue.</p>
+              <p>Creating "Super-Merchants" who consist of Farms and G0-downs that sell high volume of items.</p>
             </li>
           </ul>
         </div>
@@ -349,30 +349,26 @@
   <!-- Footer -->
   <div class="footer-bar">
     <p class="footer-text">DishiGo Ltd - Investor Pitch Deck</p>
-    <p class="page-number">08</p>
+    <p class="page-number">09</p>
   </div>
 </div>
 </body>
+
 <script>
-  function adjustLayout() {
-    const container = document.querySelector(".slide-container");
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-
-    // On Desktop: Scale to fit 16:9
-    if (winW > 1024) {
-      const scale = Math.min(winW / 1280, winH / 720);
-      container.style.transform = `scale(${scale})`;
-      container.style.borderRadius = "0px";
-    } else {
-      // On Mobile/Tablet: Fill the screen naturally
-      container.style.transform = "none";
-      container.style.width = "100vw";
-      container.style.height = "100vh";
+  (function () {
+    function fit() {
+      var el = document.querySelector('.slide-container');
+      if (!el) return;
+      el.style.width  = '1280px';
+      el.style.height = '720px';
+      el.style.flexShrink = '0';
+      el.style.overflow = 'hidden';
+      var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      el.style.transformOrigin = 'center center';
+      el.style.transform = 'scale(' + s + ')';
     }
-  }
-
-  window.addEventListener("load", adjustLayout);
-  window.addEventListener("resize", adjustLayout);
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
 </script>
 </html>

@@ -3,343 +3,438 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Presentation Mode</title>
-
+  <title>DishiGo Ltd — Investor Pitch Deck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    /* ===== RESET ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      height: 100%;
-      width: 100%;
+      height: 100%; width: 100%;
       overflow: hidden;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
+      background: #07111f;
     }
 
-    /* ===== LANDING ===== */
+    /* ══════════════════════════
+       LANDING SCREEN
+    ══════════════════════════ */
     #landing {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
       z-index: 100;
+      background: linear-gradient(145deg, #07111f 0%, #0e2235 45%, #07111f 100%);
       overflow: hidden;
     }
 
-    .bg-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none;
+      animation: drift 12s ease-in-out infinite;
+    }
+    .orb-1 { width: 600px; height: 600px; background: rgba(0,188,212,.12); top:-150px; right:-150px; animation-duration:14s; }
+    .orb-2 { width: 450px; height: 450px; background: rgba(26,58,82,.35);  bottom:-120px; left:-80px;  animation-delay:4s; }
+    .orb-3 { width: 300px; height: 300px; background: rgba(0,150,170,.08);  top:40%; left:10%;        animation-delay:7s; animation-duration:18s; }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33%       { transform: translate(20px,-30px) scale(1.04); }
+      66%       { transform: translate(-15px,20px) scale(.97); }
+    }
+
+    /* Grid overlay */
+    .grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Landing content */
+    .landing-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 560px;
+      animation: fadeUp .8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(24px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,188,212,.12);
+      border: 1px solid rgba(0,188,212,.3);
+      color: #00bcd4;
+      padding: 7px 16px;
+      border-radius: 99px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 28px;
+    }
+    .badge svg { flex-shrink: 0; }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 9vw, 5.5rem);
+      color: #fff;
+      line-height: 1; letter-spacing: -2px;
+      margin-bottom: 14px;
+    }
+    .logo .accent { color: #00bcd4; }
+
+    .tagline {
+      color: #7a96ae;
+      font-size: clamp(.88rem, 2.2vw, 1rem);
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    /* Buttons */
+    .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 15px 40px; border-radius: 8px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .92rem;
+      letter-spacing: .3px; cursor: pointer; transition: all .2s;
+      text-decoration: none; min-width: 230px; border: none;
+    }
+
+    .btn-primary {
+      background: #00bcd4; color: #fff;
+    }
+    .btn-primary:hover {
+      background: #0097a7;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,188,212,.35);
+    }
+
+    .btn-secondary {
+      background: transparent; color: #d1dde8;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,.5);
+      background: rgba(255,255,255,.05);
+      color: #fff;
+    }
+
+    /* Hint strip */
+    .hint-strip {
+      margin-top: 36px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+      color: #3d556b; font-size: 12px;
+    }
+    .key {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 5px;
+      padding: 2px 7px; font-size: 11px; color: #7a96ae;
+    }
+
+    /* Founders strip */
+    .founders-strip {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 12px;
+      color: #3d556b; font-size: 12px;
+      white-space: nowrap; z-index: 2;
+    }
+    .avatar-pair { display: flex; }
+    .av {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #0e2235;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff;
+    }
+    .av:first-child { background: #1a3a52; margin-right:-8px; }
+    .av:last-child  { background: #00838f; }
+
+    /* Portrait hint */
+    .portrait-hint {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.6); color: #fff;
+      padding: 8px 18px; border-radius: 99px;
+      font-size: 12px; display: none; z-index: 300; white-space: nowrap;
+      backdrop-filter: blur(6px);
+    }
+
+    @media (orientation: portrait) and (max-width: 500px) {
+      .portrait-hint { display: block; }
+    }
+
+    /* ══════════════════════════
+       PRESENTATION
+    ══════════════════════════ */
+    #presentation {
+      position: fixed; inset: 0;
+      display: none;
+      background: #000;
+    }
+
+    /* Iframes */
+    .slide-frame {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      border: none;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease;
       z-index: 1;
     }
-
-    .bg-slide.active {
-      opacity: 1;
-    }
-
-    #overlay {
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 2;
-    }
-
-    #landing-content {
-      position: relative;
-      z-index: 3;
-      color: white;
-      padding: 0 20px;
-    }
-
-    #landing h1 {
-      font-size: 2rem;
-    }
-
-    #enterBtn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 1.1rem;
-      border: none;
-      background: white;
-      color: black;
-      cursor: pointer;
-      transition: 0.3s;
-      min-width: 180px;
-    }
-
-    #enterBtn:hover {
-      background: #ccc;
-    }
-
-    /* ===== DOWNLOAD BUTTON ===== */
-    #downloadBtn {
-      margin-top: 12px;
-      padding: 12px 24px;
-      font-size: 1.05rem;
-      border: 2px solid white;
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-      min-width: 180px;
-    }
-
-    #downloadBtn:hover {
-      background: white;
-      color: black;
-    }
-
-    /* ===== PRESENTATION CONTAINER ===== */
-    #presentation {
-      position: fixed;
-      inset: 0;
-      display: none;
-      background: black;
-      overflow: hidden;
-      transition: background 1s ease-in-out;
-    }
-
-    /* ===== SLIDES (IFRAMES) ===== */
-    .slide-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
     .slide-frame.active {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 5;
+      opacity: 1; pointer-events: auto; z-index: 5;
     }
 
-    /* ===== NAVIGATION ZONES ===== */
-    .nav-zone {
-      position: fixed;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      z-index: 10;
-      touch-action: manipulation;
+    /* Progress bar */
+    #prog-bar {
+      position: fixed; top: 0; left: 0;
+      height: 3px; background: #00bcd4;
+      z-index: 30; border-radius: 0 2px 2px 0;
+      transition: width .35s ease;
     }
 
-    .nav-left { left: 0; }
-    .nav-right { right: 0; }
-
-    /* ===== SLIDE COUNTER ===== */
+    /* Slide counter */
     #counter {
-      position: fixed;
-      bottom: 20px;
-      right: 30px;
-      color: white;
-      font-size: 16px;
-      opacity: 0.8;
-      z-index: 20;
+      position: fixed; bottom: 16px; right: 18px;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(8px);
+      color: #fff; font-size: 12px; font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      padding: 5px 13px; border-radius: 99px;
+      z-index: 30; letter-spacing: .5px;
+      border: 1px solid rgba(255,255,255,.1);
     }
 
-    /* ===== MOBILE ===== */
-    @media (max-width: 600px) {
-      #landing h1 {
-        font-size: 1.5rem;
-      }
-      #enterBtn, #downloadBtn {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
+    /* Exit */
+    #exit-btn {
+      position: fixed; top: 14px; left: 14px;
+      background: rgba(0,0,0,.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.8);
+      font-size: 12px; padding: 7px 14px;
+      border-radius: 7px; cursor: pointer;
+      z-index: 30; display: flex; align-items: center; gap: 6px;
+      transition: all .2s; font-family: 'Inter', sans-serif;
     }
+    #exit-btn:hover {
+      background: rgba(0,0,0,.65); color: #fff;
+      border-color: rgba(255,255,255,.35);
+    }
+
+    /* Tap zones */
+    .tap-zone {
+      position: fixed; top: 0; height: 100%;
+      width: 18%; z-index: 20; cursor: pointer;
+    }
+    #tap-prev { left: 0; }
+    #tap-next { right: 0; }
+
+    /* Nav arrows (visible on hover) */
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(0,0,0,.3); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.85);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer; z-index: 25;
+      opacity: 0; transition: opacity .2s, background .2s;
+    }
+    #presentation:hover .nav-arrow { opacity: 1; }
+    .nav-arrow:hover { background: rgba(0,0,0,.6); opacity: 1 !important; }
+    #arrow-prev { left: 14px; }
+    #arrow-next { right: 14px; }
+    .nav-arrow.gone { display: none; }
   </style>
 </head>
-
 <body>
 
-<!-- ===== LANDING ===== -->
+<!-- ══ LANDING ══ -->
 <div id="landing">
-  <div id="overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grid-overlay"></div>
 
-  <div id="landing-content">
-    <h1>DishiGo Ltd</h1>
+  <div class="landing-content">
+    <div class="badge">
+      <!-- delivery icon -->
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      Investor Pitch Deck · February 2026
+    </div>
 
-    <button id="enterBtn">Start Presentation Mode</button>
+    <h1 class="logo">DishiGo <span class="accent">Ltd</span></h1>
+    <p class="tagline">
+      Affordable, trusted delivery built on existing infrastructure.<br/>
+      Transforming logistics across Kenya &amp; East Africa.
+    </p>
 
-    <!-- DOWNLOAD BUTTON -->
-    <a href="files/DISHIGO LTD Business Plan & Review.pdf" download>
-      <button id="downloadBtn">Download Proposal</button>
-    </a>
+    <div class="btn-group">
+      <button class="btn btn-primary" id="enterBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Start Presentation
+      </button>
+      <a class="btn btn-secondary" href="files/DISHIGO LTD Business Plan &amp; Review.pdf" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Proposal
+      </a>
+    </div>
+
+    <div class="hint-strip">
+      <span><span class="key">←</span><span class="key">→</span> keys</span>
+      <span>·</span>
+      <span>tap screen edges</span>
+      <span>·</span>
+      <span>swipe on mobile</span>
+      <span>·</span>
+      <span><span class="key">Esc</span> exit</span>
+    </div>
+  </div>
+
+  <div class="founders-strip">
+    <div class="avatar-pair">
+      <div class="av">FK</div>
+      <div class="av">PW</div>
+    </div>
+    <span>Francis Kanyua Kamau &amp; Peninah Wambui Kariu</span>
   </div>
 </div>
 
-<!-- ===== PRESENTATION ===== -->
-<div id="presentation">
-  <div id="counter">
-    <span id="current">1</span> /
-    <span id="total">0</span>
-  </div>
+<!-- Portrait hint -->
+<div class="portrait-hint">↩ Rotate to landscape for best experience</div>
 
-  <div class="nav-zone nav-left"></div>
-  <div class="nav-zone nav-right"></div>
+<!-- ══ PRESENTATION ══ -->
+<div id="presentation">
+  <div id="prog-bar"></div>
+
+  <button id="exit-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    Exit
+  </button>
+
+  <div class="nav-arrow gone" id="arrow-prev">&#8592;</div>
+  <div class="nav-arrow" id="arrow-next">&#8594;</div>
+
+  <div class="tap-zone" id="tap-prev"></div>
+  <div class="tap-zone" id="tap-next"></div>
+
+  <div id="counter"><span id="cur">1</span> / <span id="tot">14</span></div>
 </div>
 
 <script>
-  /* ============================= */
-  /*   DEFINE YOUR SLIDES HERE    */
-  /* ============================= */
-  const slides = [
-    "slides/slide1.html",
-    "slides/slide2.html",
-    "slides/slide3.html",
-    "slides/slide4.html",
-    "slides/slide5.html",
-    "slides/slide6.html",
-    "slides/slide7.html",
-    "slides/slide8.html",
-    "slides/slide9.html",
-    "slides/slide10.html",
-    "slides/slide11.html",
-    "slides/slide12.html",
-    "slides/slide13.html",
+  /* ── Slide list ── */
+  const SLIDES = [
+    'slides/slide1.html','slides/slide2.html','slides/slide3.html','slides/slide4.html',
+    'slides/slide5.html','slides/slide6.html','slides/slide7.html','slides/slide8.html',
+    'slides/slide9.html','slides/slide10.html','slides/slide11.html','slides/slide12.html',
+    'slides/slide13.html','slides/slide14.html'
   ];
 
-  /* ============================= */
-  /*   LANDING BACKGROUND IMAGES  */
-  /* ============================= */
-  const backgroundImages = [
-    "backgrounds/bg1.jpeg",
-    "backgrounds/bg2.jpeg",
-    "backgrounds/bg3.jpeg",
-    "backgrounds/bg4.jpeg",
-    "backgrounds/bg5.jpeg",
-    "backgrounds/bg6.jpeg",
-    "backgrounds/bg7.jpeg",
-    "backgrounds/bg8.jpeg",
-    "backgrounds/bg9.jpeg",
-    "backgrounds/bg10.jpeg",
-    "backgrounds/bg11.jpeg",
-    "backgrounds/bg12.jpeg",
-    "backgrounds/bg13.jpeg",
-    "backgrounds/bg14.jpeg",
-    "backgrounds/bg15.jpeg"
-  ];
+  const landing  = document.getElementById('landing');
+  const pres     = document.getElementById('presentation');
+  const curEl    = document.getElementById('cur');
+  const totEl    = document.getElementById('tot');
+  const progBar  = document.getElementById('prog-bar');
+  const arrowP   = document.getElementById('arrow-prev');
+  const arrowN   = document.getElementById('arrow-next');
 
-  const landing = document.getElementById("landing");
-  const enterBtn = document.getElementById("enterBtn");
-  const presentation = document.getElementById("presentation");
-  const navLeft = document.querySelector(".nav-left");
-  const navRight = document.querySelector(".nav-right");
-  const currentEl = document.getElementById("current");
-  const totalEl = document.getElementById("total");
-
-  let currentIndex = 0;
+  let idx    = 0;
   let frames = [];
 
-  totalEl.textContent = slides.length;
+  totEl.textContent = SLIDES.length;
 
-  /* ===== CREATE SLIDES ===== */
-  function createSlides() {
-    slides.forEach((src, index) => {
-      const iframe = document.createElement("iframe");
-      iframe.src = src;
-      iframe.classList.add("slide-frame");
-
-      if (index === 0) iframe.classList.add("active");
-
-      presentation.appendChild(iframe);
-      frames.push(iframe);
+  /* Create iframes lazily */
+  function buildFrames() {
+    SLIDES.forEach((src, i) => {
+      const f = document.createElement('iframe');
+      f.src = src;
+      f.className = 'slide-frame';
+      if (i === 0) f.classList.add('active');
+      pres.appendChild(f);
+      frames.push(f);
     });
   }
 
-  /* ===== UPDATE SLIDE ===== */
-  function updateSlide() {
-    frames.forEach(frame => frame.classList.remove("active"));
-    frames[currentIndex].classList.add("active");
-    currentEl.textContent = currentIndex + 1;
+  /* Navigate */
+  function goTo(i) {
+    if (i < 0 || i >= frames.length) return;
+    frames[idx].classList.remove('active');
+    idx = i;
+    frames[idx].classList.add('active');
+    render();
   }
 
-  function nextSlide() {
-    if (currentIndex < frames.length - 1) {
-      currentIndex++;
-      updateSlide();
-    }
+  function next() { goTo(idx + 1); }
+  function prev() { goTo(idx - 1); }
+
+  function render() {
+    curEl.textContent = idx + 1;
+    progBar.style.width = ((idx + 1) / SLIDES.length * 100) + '%';
+    arrowP.classList.toggle('gone', idx === 0);
+    arrowN.classList.toggle('gone', idx === SLIDES.length - 1);
   }
 
-  function prevSlide() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlide();
-    }
-  }
-
-  /* ===== ENTER PRESENTATION ===== */
-  enterBtn.addEventListener("click", async () => {
-    if (!frames.length) createSlides();
-
-    landing.style.display = "none";
-    presentation.style.display = "block";
-
-    if (document.documentElement.requestFullscreen) {
-      await document.documentElement.requestFullscreen();
-    }
-
-    updateSlide();
+  /* Enter */
+  document.getElementById('enterBtn').addEventListener('click', async () => {
+    if (!frames.length) buildFrames();
+    landing.style.display = 'none';
+    pres.style.display = 'block';
+    render();
+    try { await document.documentElement.requestFullscreen(); } catch(_) {}
   });
 
-  /* ===== EXIT PRESENTATION ===== */
-  function exitPresentation() {
-    presentation.style.display = "none";
-    landing.style.display = "flex";
-
+  /* Exit */
+  function exitPres() {
+    pres.style.display = 'none';
+    landing.style.display = 'flex';
     if (document.fullscreenElement) document.exitFullscreen();
   }
+  document.getElementById('exit-btn').addEventListener('click', exitPres);
 
-  document.addEventListener("keydown", (e) => {
-    if (presentation.style.display !== "block") return;
+  /* Click/tap zones & arrows */
+  document.getElementById('tap-prev').addEventListener('click', prev);
+  document.getElementById('tap-next').addEventListener('click', next);
+  arrowP.addEventListener('click', prev);
+  arrowN.addEventListener('click', next);
 
-    if (["ArrowRight", "ArrowDown"].includes(e.key)) nextSlide();
-    if (["ArrowLeft", "ArrowUp"].includes(e.key)) prevSlide();
-    if (e.key === "Escape") exitPresentation();
+  /* Keyboard */
+  document.addEventListener('keydown', e => {
+    if (pres.style.display !== 'block') return;
+    if (['ArrowRight','ArrowDown',' '].includes(e.key)) { e.preventDefault(); next(); }
+    if (['ArrowLeft','ArrowUp'].includes(e.key))        { e.preventDefault(); prev(); }
+    if (e.key === 'Escape') exitPres();
   });
 
-  navRight.addEventListener("click", nextSlide);
-  navLeft.addEventListener("click", prevSlide);
+  /* Swipe (touch) */
+  let tx = 0, ty = 0;
+  pres.addEventListener('touchstart', e => {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+  }, { passive: true });
 
-  presentation.addEventListener("contextmenu", e => e.preventDefault());
+  pres.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
 
-  /* ===== LANDING BACKGROUND SLIDESHOW ===== */
-  const bgSlides = [];
-
-  backgroundImages.forEach((url, i) => {
-    const div = document.createElement("div");
-    div.classList.add("bg-slide");
-    if (i === 0) div.classList.add("active");
-    div.style.backgroundImage = `url('${url}')`;
-    landing.appendChild(div);
-    bgSlides.push(div);
-  });
-
-  let bgIndex = 0;
-  setInterval(() => {
-    bgSlides[bgIndex].classList.remove("active");
-    bgIndex = (bgIndex + 1) % bgSlides.length;
-    bgSlides[bgIndex].classList.add("active");
-  }, 5000);
+  /* Prevent context menu in pres mode */
+  pres.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
 </body>
